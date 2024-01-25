@@ -7,9 +7,7 @@
  */
 
 "use strict";
-
-const speechRecognizer = new p5.SpeechRec();
-let currentSpeech = `?`;
+const speechSynthesizer = new p5.Speech();
 let currentAnimal = ``;
 const animals = [
   "aardvark",
@@ -159,34 +157,32 @@ let bg = {
 function preload() {}
 
 /**
- * Description of setup
+ * Creates the canvas
  */
 function setup() {
-  speechRecognizer.onResult = handleSpeechInput;
-  speechRecognizer.start();
-
   createCanvas(800, 800);
 }
 /**
- * Description of draw()
+ * Draws the green background
  */
 function draw() {
   background(bg.r, bg.g, bg.b);
-  textSize(32);
-  text(currentSpeech, width / 2, height / 2);
 }
-
-function mousePressed() {}
-
-function handleSpeechInput() {
-  currentSpeech = speechRecognizer.resultString;
+/**
+ * User will hear an animal pronounced backwards when the mouse is pressed
+ */
+function mousePressed() {
+  currentAnimal = animals[int(random(0, animals.length))];
+  console.log(currentAnimal);
+  let reverseAnimal = reverseString(currentAnimal);
+  speechSynthesizer.speak(reverseAnimal);
 }
 /**
 Reverses the string
 */
-function reverseString(string) {
-  // Splits the string into an array of characters
-  let characters = string.split(``);
+function reverseString(myString) {
+  //Splits the string into an array of characters
+  let characters = myString.split(``);
   // Reverses the array of characters
   let reverseCharacters = characters.reverse();
   // Joins the array of characters back into a string
@@ -194,5 +190,5 @@ function reverseString(string) {
   // Return the result
   return result;
   // Future Note: I can also combine all this into one line, such as
-  // return string.split(``).reverse().join(``);
+  //return string.split(``).reverse().join(``);
 }
