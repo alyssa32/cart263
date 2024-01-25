@@ -181,3 +181,18 @@ function mousePressed() {}
 function handleSpeechInput() {
   currentSpeech = speechRecognizer.resultString;
 }
+/**
+Reverses the string
+*/
+function reverseString(string) {
+  // Splits the string into an array of characters
+  let characters = string.split(``);
+  // Reverses the array of characters
+  let reverseCharacters = characters.reverse();
+  // Joins the array of characters back into a string
+  let result = reverseCharacters.join(``);
+  // Return the result
+  return result;
+  // Future Note: I can also combine all this into one line, such as
+  // return string.split(``).reverse().join(``);
+}
