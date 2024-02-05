@@ -8,6 +8,7 @@
 
 "use strict";
 const speechSynthesizer = new p5.Speech();
+const speechRecognizer = new p5.SpeechRec();
 let currentAnimal = ``;
 const animals = [
   "aardvark",
