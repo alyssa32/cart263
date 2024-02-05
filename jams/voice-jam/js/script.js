@@ -11,12 +11,27 @@ let canvas = {
   x: 1450,
   y: 850,
 };
+//Robot Image properties
+let standing = {
+  x: 250,
+  y: 100,
+  w: 1000,
+  h: 800,
+};
+
+let standingRobotImg;
+let confusedRobotImg;
+
 const speechRecognizer = new p5.SpeechRec();
 let currentSpeech = "?";
 /**
  * Preloads all my used images
  */
-function preload() {}
+function preload() {
+  //Images
+  standingRobotImg = loadImage("assets/images/standing.gif");
+  confusedRobotImg = loadImage("assets/images/confused.gif");
+}
 
 /**
  * Description of setup
@@ -32,6 +47,10 @@ function setup() {
  */
 function draw() {
   background(0, 0, 0);
+  image(standingRobotImg, standing.x, standing.y, standing.w, standing.h);
 }
 
-function handleSpeechInput() {}
+function handleSpeechInput() {
+  if (speechRecognizer.resultString === "stand") {
+  }
+}
