@@ -33,6 +33,8 @@ let confused = {
 
 let standingRobotImg;
 let confusedRobotImg;
+let wavingRobotImg;
+let sittingRobotImg;
 
 const speechRecognizer = new p5.SpeechRec();
 // const robotCommands = [
@@ -50,6 +52,8 @@ function preload() {
   //Images
   standingRobotImg = loadImage("assets/images/standing.gif");
   confusedRobotImg = loadImage("assets/images/confused.gif");
+  wavingRobotImg = loadImage("assets/images/hello.gif");
+  sittingRobotImg = loadImage("assets/images/sitting.gif");
 }
 /**
  * Creates the canvas and sets up the speech recognizer
