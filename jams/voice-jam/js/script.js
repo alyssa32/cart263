@@ -1,6 +1,6 @@
 /**
- * Title of Project
- * Author Name
+ * Adopt a Bot
+ * Alyssa Durdey
  *
  * This is a template. You must fill in the title, author,
  * and this description to match your project!
@@ -30,21 +30,34 @@ let confused = {
   w: 1000,
   h: 760,
 };
-
+//Images
 let standingRobotImg;
 let confusedRobotImg;
 let wavingRobotImg;
 let sittingRobotImg;
 
 const speechRecognizer = new p5.SpeechRec();
-// const robotCommands = [
-//   {
-//     "command": ["stand"],
-//     "callback": standing,
-//     image: "standingRobotImg",
-//   },
-// ];
 let currentSpeech = `?`;
+
+//Array of Robot commands
+const robotCommands = [
+  {
+    command: ["stand"],
+    image: "standingRobotImg",
+  },
+  {
+    command: ["sit"],
+    image: "sittingRobotImg",
+  },
+  {
+    command: ["hello"],
+    image: "wavingRobotImg",
+  },
+  {
+    command: ["confused"],
+    image: "confusedRobotImg",
+  },
+];
 /**
  * Preloads all my used images
  */
@@ -69,7 +82,7 @@ function setup() {
   speechRecognizer.start();
 }
 /**
- * Draws the black background colour
+ * Draws the black background colour and displays the speech input
  */
 function draw() {
   //Draws the black background
@@ -79,13 +92,25 @@ function draw() {
   text(currentSpeech, width / 2, height / 5);
   fill(textDisplay.r, textDisplay.g, textDisplay.b);
 }
-//Calls to display audio input text
+/**
+ * Calls to display audio input text
+ */
 function handleSpeechInput() {
   currentSpeech = speechRecognizer.resultString;
   console.log(speechRecognizer.resultString);
-  // if (speechRecognizer.resultString.toLowerCase() === `stand`) {
-  //   image(standingRobotImg, standing.x, standing.y, standing.w, standing.h);
-  // } else if (speechRecognizer.resultString.toLowerCase() === `stand`) {
-  //   image(confusedRobotImg, standing.x, standing.y, standing.w, standing.h);
-  // }
+}
+/**
+ * Displays the appropriate image once called
+ */
+function onResult() {
+  for (let command of robotCommands) {
+    for (let i = 0; i < robotCommands.command.length; i++) {
+      if (
+        speechRecognizer.resultString.toLowerCase() === robotCommands.command[i]
+      ) {
+        image(command.image);
+        break;
+      }
+    }
+  }
 }
