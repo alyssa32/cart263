@@ -35,15 +35,19 @@ let standingRobotImg;
 let confusedRobotImg;
 let wavingRobotImg;
 let sittingRobotImg;
+let paperImg;
+let crumpledPaperImg;
 
 const speechRecognizer = new p5.SpeechRec();
 let currentSpeech = `?`;
+
+let paperCrumpled = true;
 
 //Array of Robot commands
 const robotCommands = [
   {
     command: ["stand"],
-    image: "standingRobotImg",
+    image: standingRobotImg,
   },
   {
     command: ["sit"],
@@ -63,10 +67,12 @@ const robotCommands = [
  */
 function preload() {
   //Images
-  standingRobotImg = loadImage("assets/images/standing.gif");
-  confusedRobotImg = loadImage("assets/images/confused.gif");
-  wavingRobotImg = loadImage("assets/images/hello.gif");
-  sittingRobotImg = loadImage("assets/images/sitting.gif");
+  standingRobotImg = loadImage("assets/images/standing.PNG");
+  confusedRobotImg = loadImage("assets/images/confused.PNG");
+  wavingRobotImg = loadImage("assets/images/hello.PNG");
+  sittingRobotImg = loadImage("assets/images/sitting.PNG");
+  paperImg = loadImage("assets/images/paper.png");
+  crumpledPaperImg = loadImage("assets/images/paper.png");
 }
 /**
  * Creates the canvas and sets up the speech recognizer
@@ -91,6 +97,8 @@ function draw() {
   textSize(textDisplay.size);
   text(currentSpeech, width / 2, height / 5);
   fill(textDisplay.r, textDisplay.g, textDisplay.b);
+  //paperDisplay();
+  onResult();
 }
 /**
  * Calls to display audio input text
@@ -103,14 +111,29 @@ function handleSpeechInput() {
  * Displays the appropriate image once called
  */
 function onResult() {
-  for (let command of robotCommands) {
-    for (let i = 0; i < robotCommands.command.length; i++) {
-      if (
-        speechRecognizer.resultString.toLowerCase() === robotCommands.command[i]
-      ) {
-        image(command.image);
-        break;
-      }
+  let wordToFind = speechRecognizer.resultString;
+  for (let object of robotCommands) {
+    if (wordToFind === object.command) {
+      //  image(object.image);
     }
+    console.log(object.image);
   }
+  console.log("word to find" + wordToFind);
+  // for (let i = 0; i < robotCommands.command.length; i++) {
+  // if (
+  //   speechRecognizer.resultString.toLowerCase() === robotCommands.command[i]
+  // ) {
+  //   image(command.image);
+  //   break;
+  // }
+  //  // }
 }
+//}
+/**
+ * Displays the appropriate image once called
+ */
+// function paperDisplay() {
+//   if ((paperCrumpled = true)) {
+//     image(paperCrumpledImg, 100, 100, 100, 100);
+//   }
+// }
