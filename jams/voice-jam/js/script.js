@@ -75,19 +75,33 @@ let paperCrumpled = true;
 const robotCommands = [
   {
     command: "stand",
-    image: (standingRobotImg, standing.x, standing.y, standing.w, standing.h),
+    image: {
+      standingRobotImage: standingRobotImg,
+      x: 230,
+      y: 100,
+      w: 1000,
+      h: 760,
+    },
   },
   {
     command: "sit",
-    image: sittingRobotImg,
+    image: {
+      sittingRobotImage: sittingRobotImg,
+      x: 230,
+      y: 160,
+      w: 1000,
+      h: 760,
+    },
   },
   {
     command: "hello",
-    image: wavingRobotImg,
-  },
-  {
-    command: "confused",
-    image: confusedRobotImg,
+    image: {
+      wavingRobotImage: wavingRobotImg,
+      x: 230,
+      y: 160,
+      w: 1000,
+      h: 760,
+    },
   },
 ];
 /**
@@ -143,13 +157,16 @@ function handleSpeechInput() {
  */
 function onResult() {
   let wordToFind = speechRecognizer.resultString;
-  for (let object of robotCommands) {
+  for (const object of robotCommands) {
     if (wordToFind === object.command) {
-      image(object.image);
+      image: {
+        object.image;
+      }
     }
-    console.log(object.image);
+    //console.log(object.image);
+    console.log(object.image.x);
   }
-  console.log("word to find " + wordToFind);
+  //console.log("word to find " + wordToFind);
   // for (let i = 0; i < robotCommands.command.length; i++) {
   // if (
   //   speechRecognizer.resultString.toLowerCase() === robotCommands.command[i]
