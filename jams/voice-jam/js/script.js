@@ -110,9 +110,8 @@ function draw() {
   textSize(textDisplay.size);
   text(currentSpeech, width / 2, height / 5);
   fill(textDisplay.r, textDisplay.g, textDisplay.b);
-  paperDisplay();
+  // paperDisplay();
   onResult();
-  image(paperImg, 950, 100, 500, 550);
 }
 /**
  * Calls to display audio input text
@@ -128,9 +127,9 @@ function onResult() {
   let wordToFind = speechRecognizer.resultString;
   for (let object of robotCommands) {
     if (wordToFind === object.command) {
-      //  image(object.image);
+      image(object.image);
     }
-    //  console.log(object.image);
+    console.log(object.image);
   }
   console.log("word to find" + wordToFind);
   // for (let i = 0; i < robotCommands.command.length; i++) {
@@ -146,35 +145,36 @@ function onResult() {
 /**
  * Displays the appropriate paper image
  */
-function paperDisplay() {
-  if ((paperCrumpled = true)) {
-    image(
-      crumpledPaperImg,
-      crumpledPaper.x,
-      crumpledPaper.y,
-      crumpledPaper.w,
-      crumpledPaper.h
-    );
-  } else {
-    image(
-      paperImg,
-      unbcrumpledPaperImg,
-      unbcrumpledPaper.x,
-      unbcrumpledPaper.y,
-      unbcrumpledPaper.w,
-      unbcrumpledPaper.h
-    );
-  }
-}
+// function paperDisplay() {
+//   if ((paperCrumpled = true)) {
+//     image(
+//       crumpledPaperImg,
+//       crumpledPaper.x,
+//       crumpledPaper.y,
+//       crumpledPaper.w,
+//       crumpledPaper.h
+//     );
+//   } else {
+//     image(
+//       paperImg,
+//       unbcrumpledPaperImg,
+//       unbcrumpledPaper.x,
+//       unbcrumpledPaper.y,
+//       unbcrumpledPaper.w,
+//       unbcrumpledPaper.h
+//     );
+//   }
+// }
 /**
  * Changes the 'paperCrumpled' statement to 'true' or 'false' when clicked on
  */
-function mousePressed() {
-  if (image === crumpledPaperImg) {
-    paperCrumpled = false;
-  } else {
-    if (image === paperImg) {
-      paperCrumpled = true;
-    }
-  }
-}
+// function mousePressed() {
+//   if (crumpledPaperImg) {
+//     paperCrumpled = false;
+//   } else {
+//     if (paperImg) {
+//       paperCrumpled = true;
+//     }
+//   }
+//   console.log(paperCrumpled);
+// }
