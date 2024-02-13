@@ -30,6 +30,19 @@ let confused = {
   w: 1000,
   h: 760,
 };
+//Paper Image properties
+let crumpledPaper = {
+  x: 1100,
+  y: 600,
+  w: 100,
+  h: 100,
+};
+let uncrumpledPaper = {
+  x: 1100,
+  y: 600,
+  w: 100,
+  h: 100,
+};
 //Images
 let standingRobotImg;
 let confusedRobotImg;
@@ -72,7 +85,7 @@ function preload() {
   wavingRobotImg = loadImage("assets/images/hello.PNG");
   sittingRobotImg = loadImage("assets/images/sitting.PNG");
   paperImg = loadImage("assets/images/paper.png");
-  crumpledPaperImg = loadImage("assets/images/paper.png");
+  crumpledPaperImg = loadImage("assets/images/crumpledPaper.png");
 }
 /**
  * Creates the canvas and sets up the speech recognizer
@@ -97,8 +110,9 @@ function draw() {
   textSize(textDisplay.size);
   text(currentSpeech, width / 2, height / 5);
   fill(textDisplay.r, textDisplay.g, textDisplay.b);
-  //paperDisplay();
+  paperDisplay();
   onResult();
+  image(paperImg, 950, 100, 500, 550);
 }
 /**
  * Calls to display audio input text
@@ -116,7 +130,7 @@ function onResult() {
     if (wordToFind === object.command) {
       //  image(object.image);
     }
-    console.log(object.image);
+    //  console.log(object.image);
   }
   console.log("word to find" + wordToFind);
   // for (let i = 0; i < robotCommands.command.length; i++) {
@@ -130,10 +144,37 @@ function onResult() {
 }
 //}
 /**
- * Displays the appropriate image once called
+ * Displays the appropriate paper image
  */
-// function paperDisplay() {
-//   if ((paperCrumpled = true)) {
-//     image(paperCrumpledImg, 100, 100, 100, 100);
-//   }
-// }
+function paperDisplay() {
+  if ((paperCrumpled = true)) {
+    image(
+      crumpledPaperImg,
+      crumpledPaper.x,
+      crumpledPaper.y,
+      crumpledPaper.w,
+      crumpledPaper.h
+    );
+  } else {
+    image(
+      paperImg,
+      unbcrumpledPaperImg,
+      unbcrumpledPaper.x,
+      unbcrumpledPaper.y,
+      unbcrumpledPaper.w,
+      unbcrumpledPaper.h
+    );
+  }
+}
+/**
+ * Changes the 'paperCrumpled' statement to 'true' or 'false' when clicked on
+ */
+function mousePressed() {
+  if (image === crumpledPaperImg) {
+    paperCrumpled = false;
+  } else {
+    if (image === paperImg) {
+      paperCrumpled = true;
+    }
+  }
+}
