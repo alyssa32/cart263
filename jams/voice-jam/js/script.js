@@ -65,15 +65,15 @@ let uncrumpledPaper = {
 };
 //Speach instructions on paper
 let note = {
-  string1: `What a cute little robot!\n Can it do any tricks? \n \n sit? \n stand? \n say hello?`,
+  string1: `What a cute little robot!\n Can it do any tricks? \n \n sit? \n stand? \n say hello? \n turn off/on?`,
   string2: `It can't be evil... can it?`,
   x1: 1110,
   y1: 480,
   x2: 960,
   y2: 710,
-  r: 112,
-  g: 109,
-  b: 84,
+  r: 92,
+  g: 89,
+  b: 68,
   size1: 35,
   size2: 7,
 };
@@ -85,6 +85,7 @@ let sittingRobotImg;
 let evilRobotImg;
 let paperImg;
 let crumpledPaperImg;
+let offRobotImg;
 
 const speechRecognizer = new p5.SpeechRec();
 let currentSpeech = `Say "Hello"!`;
@@ -100,6 +101,7 @@ function preload() {
   wavingRobotImg = loadImage("assets/images/hello.PNG");
   sittingRobotImg = loadImage("assets/images/sitting.PNG");
   evilRobotImg = loadImage("assets/images/evilBot.png");
+  offRobotImg = loadImage("assets/images/off.png");
   paperImg = loadImage("assets/images/paper.png");
   crumpledPaperImg = loadImage("assets/images/crumpledPaper.png");
 }
@@ -153,6 +155,10 @@ function changeImage() {
     image(standingRobotImg, standing.x, standing.y, standing.w, standing.h);
   } else if (wordToFind === "evil") {
     image(evilRobotImg, evil.x, evil.y, evil.w, evil.h);
+  } else if (wordToFind === "off") {
+    image(offRobotImg, standing.x, standing.y, standing.w, standing.h);
+  } else if (wordToFind === "on") {
+    image(standingRobotImg, standing.x, standing.y, standing.w, standing.h);
   } else {
     image(confusedRobotImg, confused.x, confused.y, confused.w, confused.h);
   }
