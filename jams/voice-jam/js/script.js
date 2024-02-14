@@ -2,8 +2,11 @@
  * Adopt a Bot
  * Alyssa Durdey
  *
- * This is a template. You must fill in the title, author,
- * and this description to match your project!
+ * A mysterious robot has appeared who only responds to voice commands. With the help of the crumpled
+ * paper beside it, the user will get an idea of the type of commands the robot responds to. In order to
+ * read what is written on the paper, the user must press on the screen to uncrumpled it. The user can
+ * make the robot sit, stand, wave, turn off, and turn on. If the smaller text on the paper was seen,
+ * the user can have the robot turn evel as well.
  */
 
 "use strict";
@@ -139,12 +142,12 @@ function draw() {
  */
 function handleSpeechInput() {
   currentSpeech = speechRecognizer.resultString.toLowerCase();
-  console.log(speechRecognizer.resultString);
 }
 /**
- * Displays the appropriate image once called
+ * Displays the appropriate image once it is called
  */
 function changeImage() {
+  // I did not use ".toLowerCase()" because it would return an error for some reason
   let wordToFind = speechRecognizer.resultString;
   tint(255, 255);
   if (wordToFind === "hello") {
@@ -185,9 +188,11 @@ function paperDisplay() {
       uncrumpledPaper.w,
       uncrumpledPaper.h
     );
+    //Instructions
     textSize(note.size1);
     fill(note.r, note.g, note.b);
     text(note.string1, note.x1, note.y1);
+    //Hidden evil message
     textSize(note.size2);
     text(note.string2, note.x2, note.y2);
   }
