@@ -30,9 +30,21 @@ let confused = {
   w: 1000,
   h: 760,
 };
+let waving = {
+  x: 230,
+  y: 100,
+  w: 1000,
+  h: 760,
+};
 let sitting = {
   x: 230,
   y: 160,
+  w: 1000,
+  h: 760,
+};
+let evil = {
+  x: 230,
+  y: 100,
   w: 1000,
   h: 760,
 };
@@ -64,46 +76,14 @@ let standingRobotImg;
 let confusedRobotImg;
 let wavingRobotImg;
 let sittingRobotImg;
+let evilRobotImg;
 let paperImg;
 let crumpledPaperImg;
 
 const speechRecognizer = new p5.SpeechRec();
-let currentSpeech = `Say something...`;
+let currentSpeech = `Say "Hello"!`;
 let paperCrumpled = true;
 
-//Array of Robot commands
-const robotCommands = [
-  {
-    command: "stand",
-    image: {
-      standingRobotImage: standingRobotImg,
-      x: 230,
-      y: 100,
-      w: 1000,
-      h: 760,
-    },
-  },
-  {
-    command: "sit",
-    image: {
-      sittingRobotImage: sittingRobotImg,
-      x: 230,
-      y: 160,
-      w: 1000,
-      h: 760,
-    },
-  },
-  {
-    command: "hello",
-    image: {
-      wavingRobotImage: wavingRobotImg,
-      x: 230,
-      y: 160,
-      w: 1000,
-      h: 760,
-    },
-  },
-];
 /**
  * Preloads all my used images
  */
@@ -113,6 +93,7 @@ function preload() {
   confusedRobotImg = loadImage("assets/images/confused.PNG");
   wavingRobotImg = loadImage("assets/images/hello.PNG");
   sittingRobotImg = loadImage("assets/images/sitting.PNG");
+  evilRobotImg = loadImage("assets/images/evilBot.png");
   paperImg = loadImage("assets/images/paper.png");
   crumpledPaperImg = loadImage("assets/images/crumpledPaper.png");
 }
@@ -135,54 +116,48 @@ function setup() {
 function draw() {
   //Draws the black background
   background(0, 0, 0);
+  //Displays the speech audio input in blue
   fill(textDisplay.r, textDisplay.g, textDisplay.b);
   textAlign(CENTER, CENTER);
   textSize(textDisplay.size);
   text(currentSpeech, width / 2, height / 5);
-  //Displays the initial robot standing image
-  tint(255, 255);
-  image(standingRobotImg, standing.x, standing.y, standing.w, standing.h);
+  //Calls the function do display robot images
+  changeImage();
+  //Calls the function to display the paper images
   paperDisplay();
-  onResult();
 }
 /**
  * Calls to display audio input text
  */
 function handleSpeechInput() {
-  currentSpeech = speechRecognizer.resultString;
+  currentSpeech = speechRecognizer.resultString.toLowerCase();
   console.log(speechRecognizer.resultString);
 }
 /**
  * Displays the appropriate image once called
  */
-function onResult() {
+function changeImage() {
   let wordToFind = speechRecognizer.resultString;
-  for (const object of robotCommands) {
-    if (wordToFind === object.command) {
-      image: {
-        object.image;
-      }
-    }
-    //console.log(object.image);
-    console.log(object.image.x);
+  tint(255, 255);
+  if (wordToFind === "hello") {
+    image(wavingRobotImg, waving.x, waving.y, waving.w, waving.h);
+  } else if (wordToFind === "sit") {
+    image(sittingRobotImg, sitting.x, sitting.y, sitting.w, sitting.h);
+  } else if (wordToFind === "stand") {
+    image(standingRobotImg, standing.x, standing.y, standing.w, standing.h);
+  } else if (wordToFind === "evil") {
+    image(evilRobotImg, evil.x, evil.y, evil.w, evil.h);
+  } else {
+    image(confusedRobotImg, confused.x, confused.y, confused.w, confused.h);
   }
-  //console.log("word to find " + wordToFind);
-  // for (let i = 0; i < robotCommands.command.length; i++) {
-  // if (
-  //   speechRecognizer.resultString.toLowerCase() === robotCommands.command[i]
-  // ) {
-  //   image(command.image);
-  //   break;
-  // }
-  //  // }
-  //}
 }
 /**
  * Displays the appropriate paper image
  */
 function paperDisplay() {
   if ((paperCrumpled = true)) {
-    tint(120, 100); // Display at half opacity
+    // Display at half opacity
+    tint(120, 100);
     image(
       crumpledPaperImg,
       crumpledPaper.x,
@@ -190,7 +165,7 @@ function paperDisplay() {
       crumpledPaper.w,
       crumpledPaper.h
     );
-  } else {
+  } else if ((paperCrumpled = false)) {
     image(
       paperImg,
       uncrumpledPaper.x,
