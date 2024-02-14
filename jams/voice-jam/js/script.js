@@ -63,7 +63,7 @@ let uncrumpledPaper = {
 };
 //Speach instructions on paper
 let note = {
-  string: `What a cute little robot!\n Can it do any tricks? \n \n sit? \n stand? \n say hello? \n \n It cannot be evil... can it?`,
+  string: `What a cute little robot!\n Can it do any tricks? \n \n sit? \n stand? \n say hello? \n \n It can't be evil... can it?`,
   x: 1150,
   y: 480,
   r: 6,
@@ -155,7 +155,7 @@ function changeImage() {
  * Displays the appropriate paper image
  */
 function paperDisplay() {
-  if ((paperCrumpled = true)) {
+  if (paperCrumpled === true) {
     // Display at half opacity
     tint(120, 100);
     image(
@@ -165,7 +165,7 @@ function paperDisplay() {
       crumpledPaper.w,
       crumpledPaper.h
     );
-  } else if ((paperCrumpled = false)) {
+  } else if (paperCrumpled === false) {
     image(
       paperImg,
       uncrumpledPaper.x,
@@ -182,12 +182,10 @@ function paperDisplay() {
  * Changes the 'paperCrumpled' statement to 'true' or 'false' when clicked on
  */
 function mousePressed() {
-  if (crumpledPaperImg) {
+  if (paperCrumpled === true) {
     paperCrumpled = false;
-  } else {
-    if (paperImg) {
-      paperCrumpled = true;
-    }
+  } else if (paperCrumpled === false) {
+    paperCrumpled = true;
   }
   console.log(paperCrumpled);
 }
