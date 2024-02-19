@@ -9,6 +9,8 @@
 "use strict";
 //The user's webcam
 let video = undefined;
+//face model
+let faceapi = undefined;
 
 /**
  * Description of preload
@@ -23,6 +25,10 @@ function setup() {
   //Access the user's webcam
   video = createCapture(VIDEO);
   video.hide();
+  //load the face model
+  faceapi = ml5.faceApi(video, { flipHorizontal: true }, function () {
+    console.log("Model Loaded");
+  });
 }
 
 /**
