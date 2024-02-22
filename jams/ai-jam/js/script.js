@@ -7,11 +7,25 @@
  */
 
 "use strict";
-//The user's webcam
+// The user's webcam
 let video = undefined;
-//face model
-let faceapi = undefined;
-
+// The Face model
+let facemesh = undefined;
+// The current set of predictions
+let results = [];
+const STATE = {
+  STARTUP: `STARTUP`,
+  DETECTING: `DETECTING`,
+};
+//The first state being the STARTUP state
+let state = STATE.STARTUP;
+let currentPos = 1;
+let facePoint = {
+  location: "none",
+  x: 0,
+  y: 0,
+  position: currentPos,
+};
 /**
  * Description of preload
  */
@@ -26,9 +40,7 @@ function setup() {
   video = createCapture(VIDEO);
   video.hide();
   //load the face model
-  faceapi = ml5.faceApi(video, { flipHorizontal: true }, function () {
-    console.log("Model Loaded");
-  });
+  facemesh = ml5.faceApi(video, { flipHorizontal: true }, modelLoaded);
 }
 
 /**
@@ -36,4 +48,13 @@ function setup() {
  */
 function draw() {
   background(0);
+}
+/**
+ * Sets up the state once the face model is loaded
+ */
+function modelLoaded() {
+  // Is ready to switch between state once facemodel is loaded
+  state = STATE.DETECTING;
+  // Will detect the face
+  facemesh.on("face", handleFaceDetection);
 }
