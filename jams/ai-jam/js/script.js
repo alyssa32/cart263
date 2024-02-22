@@ -54,7 +54,7 @@ function setup() {
   video = createCapture(VIDEO);
   video.hide();
   //load the face model
-  facemesh = ml5.faceApi(video, { flipHorizontal: true }, modelLoaded);
+  facemesh = ml5.facemesh(video, modelLoaded);
 }
 /**
  * Draws the black background and assigns functions to states
@@ -83,6 +83,16 @@ function draw() {
 function keyPressed() {
   if (state === "INTRODUCTION") {
     state = "SIMULATION";
+  }
+}
+/**
+Called by Facemesh when it sees a face, just stores the data in results
+so we can see it in detecting()
+*/
+function handleFaceDetection(data) {
+  if (data.length > 0) {
+    console.log(data);
+    results = data;
   }
 }
 /**
@@ -122,6 +132,13 @@ function introduction() {
 function simulation() {
   // Light green background
   background(simulationDisplay.r, simulationDisplay.g, simulationDisplay.b);
+  for (let result of results) {
+    const data = result.scaledMesh;
+    facePoint.x = int(data[currentPos][0]);
+    facePoint.y = int(data[currentPos][1]);
+    //Draw a circle in the nose coordinates
+    ellipse(data[currentPos][0], data[currentPos][1], 40, 40);
+  }
 }
 /**
  * Displays the winning end screen
