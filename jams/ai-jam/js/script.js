@@ -7,6 +7,17 @@
  */
 
 "use strict";
+
+let introductionDisplay = {
+  r: 177,
+  g: 209,
+  b: 140,
+};
+let simulationDisplay = {
+  r: 149,
+  g: 181,
+  b: 112,
+};
 // The user's webcam
 let video = undefined;
 // The Face model
@@ -49,6 +60,7 @@ function setup() {
  * Draws the black background and assigns functions to states
  */
 function draw() {
+  // Draws the black background
   background(0);
   // ======================== STATES =========================
   // Calls the appropriate function for each state
@@ -62,6 +74,15 @@ function draw() {
     win();
   } else if (state === "LOSE") {
     lose();
+  }
+  console.log(state);
+}
+/**
+ * Displays the losing end screen
+ */
+function keyPressed() {
+  if (state === "INTRODUCTION") {
+    state = "SIMULATION";
   }
 }
 /**
@@ -87,11 +108,21 @@ function startUp() {
 /**
  * Displays the introduction state
  */
-function introduction() {}
+function introduction() {
+  // Light green background
+  background(
+    introductionDisplay.r,
+    introductionDisplay.g,
+    introductionDisplay.b
+  );
+}
 /**
  * Displays the simulation state
  */
-function simulation() {}
+function simulation() {
+  // Light green background
+  background(simulationDisplay.r, simulationDisplay.g, simulationDisplay.b);
+}
 /**
  * Displays the winning end screen
  */
