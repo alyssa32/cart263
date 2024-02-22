@@ -13,6 +13,7 @@ let video = undefined;
 let facemesh = undefined;
 // The current set of predictions
 let results = [];
+// All my states
 const STATE = {
   STARTUP: `STARTUP`,
   INTRODUCTION: `INTRODUCTION`,
@@ -68,14 +69,21 @@ function draw() {
  */
 function modelLoaded() {
   // Is ready to switch between state once facemodel is loaded
-  state = STATE.DETECTING;
+  state = STATE.INTRODUCTION;
   // Will detect the face
   facemesh.on("face", handleFaceDetection);
 }
 /**
  * Displays the starting up screen
  */
-function startUp() {}
+function startUp() {
+  background(0);
+  push();
+  fill(255);
+  textAlign(CENTER, CENTER);
+  text(`Loading Your Bear Nose...`, width / 2, height / 2);
+  pop();
+}
 /**
  * Displays the introduction state
  */
