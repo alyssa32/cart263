@@ -15,7 +15,10 @@ let facemesh = undefined;
 let results = [];
 const STATE = {
   STARTUP: `STARTUP`,
-  DETECTING: `DETECTING`,
+  INTRODUCTION: `INTRODUCTION`,
+  SIMULATION: `SIMULATION`,
+  WIN: `WIN`,
+  LOSE: `LOSE`,
 };
 //The first state being the STARTUP state
 let state = STATE.STARTUP;
@@ -30,9 +33,8 @@ let facePoint = {
  * Description of preload
  */
 function preload() {}
-
 /**
- * Description of setup
+ * Sets up the face mesh model and camera
  */
 function setup() {
   createCanvas(1450, 820);
@@ -42,12 +44,24 @@ function setup() {
   //load the face model
   facemesh = ml5.faceApi(video, { flipHorizontal: true }, modelLoaded);
 }
-
 /**
- * Description of draw()
+ * Draws the black background and assigns functions to states
  */
 function draw() {
   background(0);
+  // ======================== STATES =========================
+  // Calls the appropriate function for each state
+  if (state === "STARTUP") {
+    startUp();
+  } else if (state === "INTRODUCTION") {
+    introduction();
+  } else if (state === "SIMULATION") {
+    simulation();
+  } else if (state === "WIN") {
+    win();
+  } else if (state === "LOSE") {
+    lose();
+  }
 }
 /**
  * Sets up the state once the face model is loaded
@@ -58,3 +72,23 @@ function modelLoaded() {
   // Will detect the face
   facemesh.on("face", handleFaceDetection);
 }
+/**
+ * Displays the starting up screen
+ */
+function startUp() {}
+/**
+ * Displays the introduction state
+ */
+function introduction() {}
+/**
+ * Displays the simulation state
+ */
+function simulation() {}
+/**
+ * Displays the winning end screen
+ */
+function win() {}
+/**
+ * Displays the losing end screen
+ */
+function lose() {}
