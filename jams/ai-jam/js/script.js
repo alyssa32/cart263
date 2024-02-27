@@ -12,6 +12,15 @@ let introductionDisplay = {
   r: 177,
   g: 209,
   b: 140,
+  string1:
+    "As a bear, you are an animal with a remarkable \n sense of smell. Use your nose to locate your next \n three meals with the help of the given coordinates. \n \n However, there are hidden beehives scattered \n around the forest you must avoid. The honey is \n tempting, but the bees will show no mercy.",
+  x1: 320,
+  y1: 110,
+  size1: 24,
+  string2: "Press                     to begin",
+  x2: 320,
+  y2: 410,
+  size2: 20,
 };
 let simulationDisplay = {
   r: 149,
@@ -24,8 +33,6 @@ let video;
 let facemesh = undefined;
 // The current set of predictions
 let results = [];
-
-let videoOn = true;
 // All my states
 const STATE = {
   STARTUP: `STARTUP`,
@@ -81,14 +88,12 @@ function draw() {
   console.log(state);
 }
 /**
- * Displays the losing end screen
+ * Calls a command when a key is pressed
  */
 function keyPressed() {
-  if (state === "INTRODUCTION") {
+  //Switches to the Simulation state when the "Enter" key is pressed
+  if (state === "INTRODUCTION" && keyCode === ENTER) {
     state = "SIMULATION";
-  }
-  if (keyCode === ENTER) {
-    videoOn = true;
   }
 }
 /**
@@ -131,14 +136,26 @@ function introduction() {
     introductionDisplay.g,
     introductionDisplay.b
   );
+  textSize(introductionDisplay.size1);
+  textAlign(CENTER);
+  text(
+    introductionDisplay.string1,
+    introductionDisplay.x1,
+    introductionDisplay.y1
+  );
+  textSize(introductionDisplay.size2);
+  text(
+    introductionDisplay.string2,
+    introductionDisplay.x2,
+    introductionDisplay.y2
+  );
 }
 /**
  * Displays the simulation state
  */
 function simulation() {
   // Light green background
-  //background(simulationDisplay.r, simulationDisplay.g, simulationDisplay.b);
-  image(video, 0, 0);
+  background(simulationDisplay.r, simulationDisplay.g, simulationDisplay.b);
   for (let result of results) {
     const data = result.scaledMesh;
     facePoint.x = int(data[currentPos][0]);
@@ -155,7 +172,3 @@ function win() {}
  * Displays the losing end screen
  */
 function lose() {}
-
-function keyReleased() {
-  videoOn = false;
-}
