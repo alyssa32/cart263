@@ -72,7 +72,6 @@ function setup() {
 function draw() {
   // Draws the black background
   background(0);
-  // ======================== STATES =========================
   // Calls the appropriate function for each state
   if (state === "STARTUP") {
     startUp();
@@ -115,6 +114,7 @@ function modelLoaded() {
   // Will detect the face
   facemesh.on("face", handleFaceDetection);
 }
+// ======================== STATES =====================================================
 /**
  * Displays the starting up screen
  */
@@ -156,6 +156,7 @@ function introduction() {
 function simulation() {
   // Light green background
   background(simulationDisplay.r, simulationDisplay.g, simulationDisplay.b);
+  //Detects the nose position of the user
   for (let result of results) {
     const data = result.scaledMesh;
     facePoint.x = int(data[currentPos][0]);
@@ -163,6 +164,15 @@ function simulation() {
     //Draw a circle in the nose coordinates
     ellipse(data[currentPos][0], data[currentPos][1], 40, 40);
   }
+  let pointX = int(random(width));
+  let pointY = int(random(height));
+  point(pointX, pointY);
+  fill(255);
+  textSize(17);
+  textAlign(LEFT);
+  text("You detected something at X: " + pointX + " Y: " + pointY, 40, 50);
+
+  text("You are at X: " + facePoint.x + " Y: " + facePoint.y, 40, 90);
 }
 /**
  * Displays the winning end screen
