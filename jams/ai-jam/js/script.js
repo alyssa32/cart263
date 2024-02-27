@@ -27,6 +27,11 @@ let simulationDisplay = {
   g: 181,
   b: 112,
 };
+// My images
+let forestDayImg;
+let forestMorningImg;
+let forestNightImg;
+let woodenSignImg;
 // The user's webcam
 let video;
 // The Face model
@@ -51,9 +56,15 @@ let facePoint = {
   position: currentPos,
 };
 /**
- * Description of preload
+ * Preloads the images used
  */
-function preload() {}
+function preload() {
+  // Gets my images from the folder
+  forestDayImg = loadImage("assets/images/forestDay.PNG");
+  forestMorningImg = loadImage("assets/images/forestMorning.jpg");
+  forestNightImg = loadImage("assets/images/forestNight.jpg");
+  woodenSignImg = loadImage("assets/images/woodenSign.PNG");
+}
 /**
  * Sets up the face mesh model and camera
  */
@@ -164,6 +175,7 @@ function simulation() {
     //Draw a circle in the nose coordinates
     ellipse(data[currentPos][0], data[currentPos][1], 40, 40);
   }
+
   let pointX = int(random(width));
   let pointY = int(random(height));
   point(pointX, pointY);
