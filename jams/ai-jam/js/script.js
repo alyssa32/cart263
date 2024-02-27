@@ -19,11 +19,13 @@ let simulationDisplay = {
   b: 112,
 };
 // The user's webcam
-let video = undefined;
+let video;
 // The Face model
 let facemesh = undefined;
 // The current set of predictions
 let results = [];
+
+let videoOn = true;
 // All my states
 const STATE = {
   STARTUP: `STARTUP`,
@@ -49,9 +51,10 @@ function preload() {}
  * Sets up the face mesh model and camera
  */
 function setup() {
-  createCanvas(1450, 820);
+  createCanvas(640, 480);
   //Access the user's webcam
   video = createCapture(VIDEO);
+  video.size(width, height);
   video.hide();
   //load the face model
   facemesh = ml5.facemesh(video, modelLoaded);
@@ -83,6 +86,9 @@ function draw() {
 function keyPressed() {
   if (state === "INTRODUCTION") {
     state = "SIMULATION";
+  }
+  if (keyCode === ENTER) {
+    videoOn = true;
   }
 }
 /**
@@ -131,7 +137,8 @@ function introduction() {
  */
 function simulation() {
   // Light green background
-  background(simulationDisplay.r, simulationDisplay.g, simulationDisplay.b);
+  //background(simulationDisplay.r, simulationDisplay.g, simulationDisplay.b);
+  image(video, 0, 0);
   for (let result of results) {
     const data = result.scaledMesh;
     facePoint.x = int(data[currentPos][0]);
@@ -148,3 +155,7 @@ function win() {}
  * Displays the losing end screen
  */
 function lose() {}
+
+function keyReleased() {
+  videoOn = false;
+}
