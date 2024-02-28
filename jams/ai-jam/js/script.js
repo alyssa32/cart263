@@ -37,7 +37,7 @@ let winDisplay = {
     "Congradulations! \n You found your way to Jonathan's \ncompost bin, dig in!",
   x: 310,
   y: 160,
-  size: 23,
+  size: 24,
   signX: 90,
   signY: 100,
   signW: 450,
@@ -62,6 +62,11 @@ let hiddenFood = {
   x: 550,
   y: 400,
   size: 5,
+};
+let hiddenBeehive = {
+  x: 500,
+  y: 380,
+  size: 20,
 };
 // My images
 let forestDayImg;
@@ -139,14 +144,12 @@ function draw() {
 }
 // ======================== SWITCHING STATES =====================================================
 /**
- * Switches to the Simulation state when the "Enter" key is pressed
+ * Switches the state when the "Enter" key is pressed
  */
 function keyPressed() {
+  // Switches to the SIMULATION state if the user is currently in INTRODUCTION
   if (state === "INTRODUCTION" && keyCode === ENTER) {
     state = "SIMULATION";
-  }
-  if (state === "WIN" && keyCode === ENTER) {
-    state = "INTRODUCTION";
   }
 }
 /**
@@ -157,6 +160,11 @@ function foundCoordinates() {
   // If the nose radius and touches the hidden coordinates, switch to the "WIN" state
   if (d < hiddenFood.size / 2 + nose.size / 2) {
     state = "WIN";
+  }
+  let d2 = dist(hiddenBeehive.x, hiddenBeehive.y, facePoint.x, facePoint.y);
+  // If the nose radius and touches the hidden coordinates, switch to the "LOSE" state
+  if (d2 < hiddenBeehive.size / 2 + nose.size / 2) {
+    state = "LOSE";
   }
 }
 /**
@@ -174,7 +182,7 @@ function handleFaceDetection(data) {
  */
 function modelLoaded() {
   // Is ready to switch between state once facemodel is loaded
-  state = STATE.WIN;
+  state = STATE.INTRODUCTION;
   // Will detect the face
   facemesh.on("face", handleFaceDetection);
 }
@@ -228,6 +236,7 @@ function simulation() {
     facePoint.x = int(data[currentPos][0]);
     facePoint.y = int(data[currentPos][1]);
     //Draw a circle in the nose coordinates
+    fill(0);
     circle(data[currentPos][0], data[currentPos][1], nose.size);
   }
   // Image of the small wooden sign
@@ -253,7 +262,12 @@ function simulation() {
     simulationDisplay.x2,
     simulationDisplay.y2
   );
+  // Transparent circle which the user must collide with, with their nose
+  noFill();
+  noStroke();
   circle(hiddenFood.x, hiddenFood.y, hiddenFood.size);
+  // Transparent circles which the user must avoid (acts as hidden bee hives)
+  circle(hiddenBeehive.x, hiddenBeehive.y, hiddenBeehive.size);
 }
 /**
  * Displays the winning end screen
