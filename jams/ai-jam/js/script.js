@@ -9,9 +9,9 @@
 "use strict";
 
 let introductionDisplay = {
-  r: 177,
-  g: 209,
-  b: 140,
+  r: 18,
+  g: 13,
+  b: 1,
   string1:
     "As a bear, you are an animal with a remarkable \n sense of smell. Use your nose to locate your next \n three meals with the help of the given coordinates. \n \n However, there are hidden beehives scattered \n around the forest you must avoid. The honey is \n tempting, but the bees will show no mercy.",
   x1: 320,
@@ -19,7 +19,7 @@ let introductionDisplay = {
   size1: 24,
   string2: "Press                     to begin",
   x2: 320,
-  y2: 410,
+  y2: 430,
   size2: 20,
 };
 let simulationDisplay = {
@@ -27,11 +27,24 @@ let simulationDisplay = {
   g: 181,
   b: 112,
 };
+let forestDay = {
+  x: 0,
+  y: 0,
+  w: 640,
+  h: 480,
+};
+let smallWoodenSign = {
+  x: 0,
+  y: 10,
+  w: 380,
+  h: 120,
+};
 // My images
 let forestDayImg;
 let forestMorningImg;
 let forestNightImg;
 let woodenSignImg;
+let smallWoodenSignImg;
 // The user's webcam
 let video;
 // The Face model
@@ -63,7 +76,8 @@ function preload() {
   forestDayImg = loadImage("assets/images/forestDay.PNG");
   forestMorningImg = loadImage("assets/images/forestMorning.jpg");
   forestNightImg = loadImage("assets/images/forestNight.jpg");
-  woodenSignImg = loadImage("assets/images/woodenSign.PNG");
+  woodenSignImg = loadImage("assets/images/woodenSign.png");
+  smallWoodenSignImg = loadImage("assets/images/smallWoodenSign.png");
 }
 /**
  * Sets up the face mesh model and camera
@@ -141,14 +155,16 @@ function startUp() {
  * Displays the introduction state
  */
 function introduction() {
-  // Light green background
-  background(
-    introductionDisplay.r,
-    introductionDisplay.g,
-    introductionDisplay.b
-  );
+  // Forest BG Image
+  image(forestDayImg, forestDay.x, forestDay.y, forestDay.w, forestDay.h);
+  filter(BLUR, 4);
+  // Wooden Sign Image
+  //filter(BLUR, false);
+  image(woodenSignImg, -20, 10, 660, 470);
+  // Text on wooden sign
   textSize(introductionDisplay.size1);
   textAlign(CENTER);
+  fill(introductionDisplay.r, introductionDisplay.g, introductionDisplay.b);
   text(
     introductionDisplay.string1,
     introductionDisplay.x1,
@@ -165,8 +181,8 @@ function introduction() {
  * Displays the simulation state
  */
 function simulation() {
-  // Light green background
-  background(simulationDisplay.r, simulationDisplay.g, simulationDisplay.b);
+  // Forest BG Image
+  image(forestDayImg, forestDay.x, forestDay.y, forestDay.w, forestDay.h);
   //Detects the nose position of the user
   for (let result of results) {
     const data = result.scaledMesh;
@@ -175,15 +191,20 @@ function simulation() {
     //Draw a circle in the nose coordinates
     ellipse(data[currentPos][0], data[currentPos][1], 40, 40);
   }
-
-  let pointX = int(random(width));
-  let pointY = int(random(height));
-  point(pointX, pointY);
-  fill(255);
+  // Image of the small wooden sign
+  image(
+    smallWoodenSignImg,
+    smallWoodenSign.x,
+    smallWoodenSign.y,
+    smallWoodenSign.w,
+    smallWoodenSign.h
+  );
+  // Displays the coordinate the user is aiming to reach
+  fill(introductionDisplay.r, introductionDisplay.g, introductionDisplay.b);
   textSize(17);
   textAlign(LEFT);
-  text("You detected something at X: " + pointX + " Y: " + pointY, 40, 50);
-
+  text("You detected something at X: 550  Y: 400", 40, 50);
+  // Displays the nose's current coordinates
   text("You are at X: " + facePoint.x + " Y: " + facePoint.y, 40, 90);
 }
 /**
