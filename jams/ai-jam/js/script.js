@@ -13,7 +13,7 @@ let introductionDisplay = {
   g: 13,
   b: 1,
   string1:
-    "As a bear, you are an animal with a remarkable \n sense of smell. Use your nose to locate your next \n three meals with the help of the given coordinates. \n \n However, there are hidden beehives scattered \n around the forest you must avoid. The honey is \n tempting, but the bees will show no mercy.",
+    "As a bear, you are an animal with a remarkable \n sense of smell. Use your nose to locate your next \n meal with the help of the given coordinates. \n \n However, there are hidden beehives scattered \n around the forest you must avoid. The honey is \n tempting, but the bees will show no mercy.",
   x1: 320,
   y1: 110,
   size1: 24,
@@ -34,7 +34,7 @@ let simulationDisplay = {
 };
 let winDisplay = {
   string:
-    "Congradulations! \n You found your way to Jonathan's \ncompost bin, dig in!",
+    "Beary good! \n You found your way to Jonathan's \ncompost bin, dig in!",
   x: 310,
   y: 160,
   size: 24,
@@ -42,6 +42,11 @@ let winDisplay = {
   signY: 100,
   signW: 450,
   signH: 190,
+};
+let loseDisplay = {
+  string: "Ouch! \n Your nose found its way \n into a beehive",
+  x: 310,
+  y: 160,
 };
 let forestDay = {
   x: 0,
@@ -74,6 +79,8 @@ let forestMorningImg;
 let forestNightImg;
 let woodenSignImg;
 let smallWoodenSignImg;
+let beesImg;
+let bananaImg;
 // The user's webcam
 let video;
 // The Face model
@@ -107,6 +114,8 @@ function preload() {
   forestNightImg = loadImage("assets/images/forestNight.jpg");
   woodenSignImg = loadImage("assets/images/woodenSign.png");
   smallWoodenSignImg = loadImage("assets/images/smallWoodenSign.png");
+  beesImg = loadImage("assets/images/bees.png");
+  bananaImg = loadImage("assets/images/banana.png");
 }
 /**
  * Sets up the face mesh model and camera
@@ -293,4 +302,21 @@ function win() {
 /**
  * Displays the losing end screen
  */
-function lose() {}
+function lose() {
+  // Forest BG Image
+  image(forestDayImg, forestDay.x, forestDay.y, forestDay.w, forestDay.h);
+  // Blur's the bg image
+  filter(BLUR, 4);
+  // Displays the small wooden sign image
+  image(
+    smallWoodenSignImg,
+    winDisplay.signX,
+    winDisplay.signY,
+    winDisplay.signW,
+    winDisplay.signH
+  );
+  fill(introductionDisplay.r, introductionDisplay.g, introductionDisplay.b);
+  textSize(winDisplay.size);
+  textAlign(CENTER);
+  text(loseDisplay.string, loseDisplay.x, loseDisplay.y);
+}
