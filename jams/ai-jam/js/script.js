@@ -1,9 +1,11 @@
 /**
- * Title of Project
+ * Bear-y Hungry
  * Alyssa Durdey
  *
- * This is a template. You must fill in the title, author,
- * and this description to match your project!
+ * This game uses an AI facemesh model to allow the player to control the cursor with their nose. The idea of this game is
+ * that the user is a bear, searching for their meals.With their head movements, the user must navigate to the given
+ * coordinates to locate the food. There are no visual indications of this point, only its coordinates. The plays must
+ * also avoid beehives which are hidden as well, so it is a chance of luck.
  */
 
 "use strict";
@@ -72,6 +74,18 @@ let hiddenBeehive = {
   x: 500,
   y: 380,
   size: 20,
+};
+let bees = {
+  x: 370,
+  y: 220,
+  w: 210,
+  h: 140,
+};
+let banana = {
+  x: 340,
+  y: 210,
+  w: 210,
+  h: 140,
 };
 // My images
 let forestDayImg;
@@ -298,6 +312,7 @@ function win() {
   textSize(winDisplay.size);
   textAlign(CENTER);
   text(winDisplay.string, winDisplay.x, winDisplay.y);
+  image(bananaImg, banana.x, banana.y, banana.w, banana.h);
 }
 /**
  * Displays the losing end screen
@@ -319,4 +334,5 @@ function lose() {
   textSize(winDisplay.size);
   textAlign(CENTER);
   text(loseDisplay.string, loseDisplay.x, loseDisplay.y);
+  image(beesImg, bees.x, bees.y, bees.w, bees.h);
 }
