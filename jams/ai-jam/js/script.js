@@ -32,6 +32,17 @@ let simulationDisplay = {
   x2: 40,
   y2: 90,
 };
+let winDisplay = {
+  string:
+    "Congradulations! \n You found your way to Jonathan's \ncompost bin, dig in!",
+  x: 310,
+  y: 160,
+  size: 23,
+  signX: 90,
+  signY: 100,
+  signW: 450,
+  signH: 190,
+};
 let forestDay = {
   x: 0,
   y: 0,
@@ -134,6 +145,9 @@ function keyPressed() {
   if (state === "INTRODUCTION" && keyCode === ENTER) {
     state = "SIMULATION";
   }
+  if (state === "WIN" && keyCode === ENTER) {
+    state = "INTRODUCTION";
+  }
 }
 /**
  * Switches to the winning state when the user's nose matches the given coordinates
@@ -160,7 +174,7 @@ function handleFaceDetection(data) {
  */
 function modelLoaded() {
   // Is ready to switch between state once facemodel is loaded
-  state = STATE.INTRODUCTION;
+  state = STATE.WIN;
   // Will detect the face
   facemesh.on("face", handleFaceDetection);
 }
@@ -244,7 +258,24 @@ function simulation() {
 /**
  * Displays the winning end screen
  */
-function win() {}
+function win() {
+  // Forest BG Image
+  image(forestDayImg, forestDay.x, forestDay.y, forestDay.w, forestDay.h);
+  // Blur's the bg image
+  filter(BLUR, 4);
+  // Displays the small wooden sign image
+  image(
+    smallWoodenSignImg,
+    winDisplay.signX,
+    winDisplay.signY,
+    winDisplay.signW,
+    winDisplay.signH
+  );
+  fill(introductionDisplay.r, introductionDisplay.g, introductionDisplay.b);
+  textSize(winDisplay.size);
+  textAlign(CENTER);
+  text(winDisplay.string, winDisplay.x, winDisplay.y);
+}
 /**
  * Displays the losing end screen
  */
