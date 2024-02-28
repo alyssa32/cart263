@@ -26,6 +26,11 @@ let simulationDisplay = {
   r: 149,
   g: 181,
   b: 112,
+  size: 17,
+  x1: 40,
+  y1: 50,
+  x2: 40,
+  y2: 90,
 };
 let forestDay = {
   x: 0,
@@ -38,6 +43,14 @@ let smallWoodenSign = {
   y: 10,
   w: 380,
   h: 120,
+};
+let nose = {
+  size: 30,
+};
+let hiddenFood = {
+  x: 550,
+  y: 400,
+  size: 5,
 };
 // My images
 let forestDayImg;
@@ -110,14 +123,26 @@ function draw() {
     lose();
   }
   console.log(state);
+  // Calls the function to switch states once the user arrives at the coordinates
+  foundCoordinates();
 }
+// ======================== SWITCHING STATES =====================================================
 /**
- * Calls a command when a key is pressed
+ * Switches to the Simulation state when the "Enter" key is pressed
  */
 function keyPressed() {
-  //Switches to the Simulation state when the "Enter" key is pressed
   if (state === "INTRODUCTION" && keyCode === ENTER) {
     state = "SIMULATION";
+  }
+}
+/**
+ * Switches to the winning state when the user's nose matches the given coordinates
+ */
+function foundCoordinates() {
+  let d = dist(hiddenFood.x, hiddenFood.y, facePoint.x, facePoint.y);
+  // If the nose radius and touches the hidden coordinates, switch to the "WIN" state
+  if (d < hiddenFood.size / 2 + nose.size / 2) {
+    state = "WIN";
   }
 }
 /**
@@ -157,11 +182,11 @@ function startUp() {
 function introduction() {
   // Forest BG Image
   image(forestDayImg, forestDay.x, forestDay.y, forestDay.w, forestDay.h);
+  // Blur's the bg image
   filter(BLUR, 4);
   // Wooden Sign Image
-  //filter(BLUR, false);
   image(woodenSignImg, -20, 10, 660, 470);
-  // Text on wooden sign
+  // Into ext on wooden sign
   textSize(introductionDisplay.size1);
   textAlign(CENTER);
   fill(introductionDisplay.r, introductionDisplay.g, introductionDisplay.b);
@@ -189,7 +214,7 @@ function simulation() {
     facePoint.x = int(data[currentPos][0]);
     facePoint.y = int(data[currentPos][1]);
     //Draw a circle in the nose coordinates
-    ellipse(data[currentPos][0], data[currentPos][1], 40, 40);
+    circle(data[currentPos][0], data[currentPos][1], nose.size);
   }
   // Image of the small wooden sign
   image(
@@ -201,11 +226,20 @@ function simulation() {
   );
   // Displays the coordinate the user is aiming to reach
   fill(introductionDisplay.r, introductionDisplay.g, introductionDisplay.b);
-  textSize(17);
+  textSize(simulationDisplay.size);
   textAlign(LEFT);
-  text("You detected something at X: 550  Y: 400", 40, 50);
+  text(
+    "You detected something at X: 550  Y: 400",
+    simulationDisplay.x1,
+    simulationDisplay.y1
+  );
   // Displays the nose's current coordinates
-  text("You are at X: " + facePoint.x + " Y: " + facePoint.y, 40, 90);
+  text(
+    "You are at X: " + facePoint.x + " Y: " + facePoint.y,
+    simulationDisplay.x2,
+    simulationDisplay.y2
+  );
+  circle(hiddenFood.x, hiddenFood.y, hiddenFood.size);
 }
 /**
  * Displays the winning end screen
