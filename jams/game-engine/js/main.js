@@ -3,8 +3,8 @@
 let config = {
   // The type refers to the kind of display we'll be using
   type: Phaser.AUTO,
-  width: 800,
-  height: 460,
+  width: 1420,
+  height: 800,
   physics: {
     default: "arcade",
   },

@@ -8,11 +8,17 @@ class Boot extends Phaser.Scene {
   }
   create() {
     let style = {
-      fontSize: 14,
+      fontSize: 24,
       color: `#ffffff`,
     };
-    let loadingString = `Loading...`;
-    this.add.text(330, 200, loadingString, style);
+    let loading = {
+      string: `Loading...`,
+      x: 600,
+      y: 370,
+    };
+    this.add.text(loading.x, loading.y, loading.string, style);
+    //When the Boot scene starts up, it refers the player to the `play` scene
+    this.scene.start(`play`);
   }
 
   update() {}
