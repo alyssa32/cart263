@@ -14,13 +14,27 @@ class Play extends Phaser.Scene {
   create() {
     //Creates the background
     this.add.image(0, -140, "whiteBackground").setOrigin(0);
-    //Defines the ground properties
-    const ground = this.physics.add.staticGroup();
-    ground.create(400, 668, "ground").setScale(2).refreshBody();
     //Calls functions
     this.players();
     //Calls to define cursor keys
     this.cursors = this.input.keyboard.createCursorKeys();
+
+    this.input.on(
+      "pointerdown",
+      () => {
+        if (this.currentPlayer === this.player1) {
+          this.currentPlayer = this.player2;
+        } else {
+          this.currentPlayer = this.player1;
+        }
+      },
+      this
+    );
+
+    this.add.text(10, 10, "Click to change character", {
+      fontSize: "22px",
+      fill: "#c7c7c7",
+    });
   }
   //Everything that pertains to the characters
   players() {
@@ -40,6 +54,9 @@ class Play extends Phaser.Scene {
     this.player2.setPushable(false);
     //Sets Player 1 to be the first player to be played
     this.currentPlayer = this.player1;
+
+    //this.physics.add.collider(this.player1, ground);
+    //this.physics.add.collider(this.player2, ground);
   }
 
   //Will constantly be called (draw() equivalent)
