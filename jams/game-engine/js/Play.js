@@ -16,25 +16,9 @@ class Play extends Phaser.Scene {
     this.add.image(0, -140, "whiteBackground").setOrigin(0);
     //Calls functions
     this.players();
+    this.onClick();
     //Calls to define cursor keys
     this.cursors = this.input.keyboard.createCursorKeys();
-
-    this.input.on(
-      "pointerdown",
-      () => {
-        if (this.currentPlayer === this.player1) {
-          this.currentPlayer = this.player2;
-        } else {
-          this.currentPlayer = this.player1;
-        }
-      },
-      this
-    );
-
-    this.add.text(10, 10, "Click to change character", {
-      fontSize: "22px",
-      fill: "#c7c7c7",
-    });
   }
   //Everything that pertains to the characters
   players() {
@@ -58,7 +42,20 @@ class Play extends Phaser.Scene {
     //this.physics.add.collider(this.player1, ground);
     //this.physics.add.collider(this.player2, ground);
   }
+  onClick() {
+    this.input.on("pointerdown", () => {
+      if (this.currentPlayer === this.player1) {
+        this.currentPlayer = this.player2;
+      } else {
+        this.currentPlayer = this.player1;
+      }
+    });
 
+    this.add.text(10, 10, "Click to change character", {
+      fontSize: "22px",
+      fill: "#c7c7c7",
+    });
+  }
   //Will constantly be called (draw() equivalent)
   update() {
     //Selected player will move left if the left arrow key is pressed
