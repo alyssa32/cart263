@@ -6,6 +6,14 @@ class Boot extends Phaser.Scene {
       key: `boot`,
     });
   }
+  preload() {
+    this.load.image("whiteBackground", "assets/images/wBackground.png");
+    this.load.image("blackBackground", "assets/images/bBackground.png");
+    this.load.image("whitePlatform1", "assets/images/wPlatform1.png");
+    this.load.image("whitePlatform2", "assets/images/wPlatform2.png");
+    this.load.image("blackPlatform1", "assets/images/bPlatform1.png");
+    this.load.image("blackPlatform2", "assets/images/bPlatform2.png");
+  }
   create() {
     let style = {
       fontSize: 24,

@@ -12,6 +12,7 @@ class Play extends Phaser.Scene {
       fontSize: 34,
       color: `#bdfffe`,
     };
+    this.add.image(0, -140, "whiteBackground").setOrigin(0);
     let gameDescription = `Add the game description here`;
     this.add.text(100, 100, gameDescription, style);
   }
