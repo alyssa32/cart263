@@ -6,11 +6,6 @@ class Play extends Phaser.Scene {
       key: `play`,
     });
   }
-
-  player1Properties = {
-    w: 100,
-    h: 100,
-  };
   cursors;
   currentPlayer;
   player2;
@@ -24,10 +19,9 @@ class Play extends Phaser.Scene {
     ground.create(400, 668, "ground").setScale(2).refreshBody();
     //Calls functions
     this.players();
-    this.movement();
+    //Calls to define cursor keys
+    this.cursors = this.input.keyboard.createCursorKeys();
   }
-  //Will constantly be called (draw() equivalent)
-  update() {}
   //Everything that pertains to the characters
   players() {
     // Player 1
@@ -35,7 +29,6 @@ class Play extends Phaser.Scene {
       .sprite(50, 660, "player1")
       .setScale(0.05)
       .setBounce(0.2)
-
       .setCollideWorldBounds(true);
     //Player 2
     this.player2 = this.physics.add
@@ -44,17 +37,26 @@ class Play extends Phaser.Scene {
       .setBounce(0.2)
 
       .setCollideWorldBounds(true);
-    // this.player1.name = "Black";
-    // this.player2.name = "White";
-    // this.player2.setPushable(false);
-    // this.currentPlayer = this.player1;
+    this.player2.setPushable(false);
+    //Sets Player 1 to be the first player to be played
+    this.currentPlayer = this.player1;
   }
-  movement() {
-    this.anims.create({
-      key: "left",
-      frames: this.anims.generateFrameNumbers("player1", { start: 0, end: 3 }),
-      frameRate: 10,
-      repeat: -1,
-    });
+
+  //Will constantly be called (draw() equivalent)
+  update() {
+    //Selected player will move left if the left arrow key is pressed
+    if (this.cursors.left.isDown == true) {
+      this.currentPlayer.setVelocityX(-160);
+      //Selected player will move right if the left arrow key is pressed
+    } else if (this.cursors.right.isDown == true) {
+      this.currentPlayer.setVelocityX(160);
+    } else {
+      //If no arrows are pressed, the player will not move left or right
+      this.currentPlayer.setVelocityX(0);
+    } //Selected player will move upwards if the left arrow key is pressed
+    if (this.cursors.up.isDown == true) {
+      this.currentPlayer.setVelocityY(-330);
+      window.showit = true;
+    }
   }
 }
