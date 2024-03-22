@@ -18,8 +18,6 @@ class Play extends Phaser.Scene {
   create() {
     //Creates the background
     this.background = this.add.image(0, -140, "whiteBackground").setOrigin(0);
-    //Creates the ground
-    this.ground = this.add.image(0, 700, "blackGround").setOrigin(0);
     //Adds instructions to the top left corner
     this.add.text(10, 10, "Click to change character", {
       fontSize: "22px",
@@ -64,8 +62,34 @@ class Play extends Phaser.Scene {
   //Has Everything to do with Platforms
   //*
   blocks() {
+    //Displays the black ground block image
+    this.ground = this.add
+      .image(0, 690, "blackGround")
+      .setOrigin(0)
+      .setScale(1.3);
+    //Prevents the ground block from moving
     this.ground.setImmovable = true;
-    this.physics.add.collider(this.player1, this.player2, this.ground);
+
+    this.physics.add.collider(this.player1, this.ground);
+
+    //Displays the black floating platform blocks
+    this.platform = this.add
+      .image(720, 330, "blackPlatform1")
+      .setOrigin(0)
+      .setScale(0.09).depth = 100;
+    this.platform = this.add
+      .image(400, 575, "blackPlatform2")
+      .setOrigin(0)
+      .setScale(0.5).depth = 100;
+    //Displays the white floating platform blocks
+    this.platform = this.add
+      .image(440, 365, "whitePlatform1")
+      .setOrigin(0)
+      .setScale(0.09).depth = 100;
+    this.platform = this.add
+      .image(170, 465, "whitePlatform2")
+      .setOrigin(0)
+      .setScale(0.08).depth = 100;
   }
   //*
   //Will perform actions if mouse is clicked
