@@ -18,6 +18,8 @@ class Play extends Phaser.Scene {
   create() {
     //Creates the background
     this.background = this.add.image(0, -140, "whiteBackground").setOrigin(0);
+    //Creates the ground
+    this.ground = this.add.image(0, 700, "blackGround").setOrigin(0);
     //Adds instructions to the top left corner
     this.add.text(10, 10, "Click to change character", {
       fontSize: "22px",
@@ -95,11 +97,13 @@ class Play extends Phaser.Scene {
         this.background = this.add
           .image(0, -140, "blackBackground")
           .setOrigin(0);
+        this.ground = this.add.image(0, 700, "whiteGround").setOrigin(0);
       } else {
         this.currentPlayer = this.player1;
         this.background = this.add
           .image(0, -140, "whiteBackground")
           .setOrigin(0);
+        this.ground = this.add.image(0, 700, "blackGround").setOrigin(0);
       }
     });
   }
