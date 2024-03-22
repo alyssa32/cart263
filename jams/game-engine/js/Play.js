@@ -18,6 +18,8 @@ class Play extends Phaser.Scene {
   create() {
     //Creates the background
     this.background = this.add.image(0, -140, "whiteBackground").setOrigin(0);
+    //Creates the star
+    this.star = this.add.image(900, 130, "star").setOrigin(0).depth = 100;
     //Adds instructions to the top left corner
     this.add.text(10, 10, "Click to change character", {
       fontSize: "22px",
@@ -37,7 +39,7 @@ class Play extends Phaser.Scene {
   players() {
     // Player 1
     this.player1 = this.physics.add
-      .sprite(50, 610, "player1")
+      .sprite(450, 410, "player1")
       .setScale(0.05)
       .setBounce(0.2)
       .setCollideWorldBounds(true);
@@ -67,9 +69,8 @@ class Play extends Phaser.Scene {
       .image(0, 690, "blackGround")
       .setOrigin(0)
       .setScale(1.3);
-    //Prevents the ground block from moving
+    // TRIES to have the ground block collide
     this.ground.setImmovable = true;
-
     this.physics.add.collider(this.player1, this.ground);
 
     //Displays the black floating platform blocks
