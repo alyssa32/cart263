@@ -17,13 +17,13 @@ class Play extends Phaser.Scene {
   //*
   create() {
     //Creates the background
-    this.add.image(0, -140, "whiteBackground").setOrigin(0);
+    this.background = this.add.image(0, -140, "whiteBackground").setOrigin(0);
     //Adds instructions to the top left corner
     this.add.text(10, 10, "Click to change character", {
       fontSize: "22px",
       //Grey colour
       fill: "#c7c7c7",
-    });
+    }).depth = 100;
     //Calls functions
     this.players();
     this.blocks();
@@ -41,6 +41,7 @@ class Play extends Phaser.Scene {
       .setScale(0.05)
       .setBounce(0.2)
       .setCollideWorldBounds(true);
+    this.player1.depth = 100;
     //Player 2
     this.player2 = this.physics.add
       .sprite(890, 622, "player2")
@@ -48,12 +49,17 @@ class Play extends Phaser.Scene {
       .setBounce(0.2)
       //Contricts the players within the canvas border
       .setCollideWorldBounds(true);
+    this.player2.depth = 100;
     //Makes Player 2 not pushable
     this.player2.setPushable(false);
     //Sets Player 1 to be the first player to be played
     this.currentPlayer = this.player1;
+    //Have the players collide
     this.physics.add.collider(this.player2, this.player1);
   }
+  //*
+  //Has Everything to do with Platforms
+  //*
   blocks() {
     const platforms = this.physics.add.group({
       defaultKey: "ground",
@@ -68,8 +74,8 @@ class Play extends Phaser.Scene {
       platform.body.immovable = true;
       platform.body.moves = false;
     }
-    const block = this.physics.add.staticImage(100, 300, "blackPlatform1");
-
+    //const block = this.physics.add.staticImage(100, 300, "blackPlatform1");
+    //Player collides with the platforms
     this.physics.add.collider(
       this.currentPlayer,
       platforms,
@@ -86,8 +92,14 @@ class Play extends Phaser.Scene {
     this.input.on("pointerdown", () => {
       if (this.currentPlayer === this.player1) {
         this.currentPlayer = this.player2;
+        this.background = this.add
+          .image(0, -140, "blackBackground")
+          .setOrigin(0);
       } else {
         this.currentPlayer = this.player1;
+        this.background = this.add
+          .image(0, -140, "whiteBackground")
+          .setOrigin(0);
       }
     });
   }
