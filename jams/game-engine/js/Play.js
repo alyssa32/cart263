@@ -52,7 +52,8 @@ class Play extends Phaser.Scene {
       //Contricts the players within the canvas border
       .setCollideWorldBounds(true);
     this.player2.depth = 100;
-    //Makes Player 2 not pushable
+    //Makes the players not pushable
+    this.player1.setPushable(false);
     this.player2.setPushable(false);
     //Sets Player 1 to be the first player to be played
     this.currentPlayer = this.player1;
@@ -63,46 +64,31 @@ class Play extends Phaser.Scene {
   //Has Everything to do with Platforms
   //*
   blocks() {
-    const platforms = this.physics.add.group({
-      defaultKey: "ground",
-    });
-    platforms.create(400, 500);
-    platforms.create(450, 400);
-    platforms.create(500, 300);
-    platforms.create(550, 200);
-    platforms.create(600, 100);
-    //Secures the platforms into place
-    for (const platform of platforms.getChildren()) {
-      platform.body.immovable = true;
-      platform.body.moves = false;
-    }
-    //const block = this.physics.add.staticImage(100, 300, "blackPlatform1");
-    //Player collides with the platforms
-    this.physics.add.collider(
-      this.currentPlayer,
-      platforms,
-      (currentPlayer, platform) => {
-        // platform.body.moves = true;
-        platform.body.checkCollision = true;
-      }
-    );
+    this.ground.setImmovable = true;
+    this.physics.add.collider(this.player1, this.player2, this.ground);
   }
   //*
-  //Will change between players if mouse if clicked
+  //Will perform actions if mouse is clicked
   //*
   onClick() {
     this.input.on("pointerdown", () => {
       if (this.currentPlayer === this.player1) {
+        //switches to player 2
         this.currentPlayer = this.player2;
+        //Changes to the black background image
         this.background = this.add
           .image(0, -140, "blackBackground")
           .setOrigin(0);
+        //Changes the ground colour to white
         this.ground = this.add.image(0, 700, "whiteGround").setOrigin(0);
       } else {
+        //switches to player 1
         this.currentPlayer = this.player1;
+        //Changes to the white background image
         this.background = this.add
           .image(0, -140, "whiteBackground")
           .setOrigin(0);
+        //Changes the ground colour to black
         this.ground = this.add.image(0, 700, "blackGround").setOrigin(0);
       }
     });
@@ -120,8 +106,8 @@ class Play extends Phaser.Scene {
     } else {
       //If no arrows are pressed, the player will not move left or right
       this.currentPlayer.setVelocityX(0);
-    } //Selected player will move upwards if the left arrow key is pressed
-    if (this.cursors.up.isDown == true) {
+    } //Selected player will move upwards if the left arrow key is pressed and if the player is NOT already in the air
+    if (this.cursors.up.isDown == true && this.currentPlayer.body.onFloor()) {
       this.currentPlayer.setVelocityY(-330);
       window.showit = true;
     }
