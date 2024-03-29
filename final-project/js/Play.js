@@ -18,8 +18,11 @@ class Play extends Phaser.Scene {
   create() {
     //Creates the background
     this.background = this.add.image(0, -140, "whiteBackground").setOrigin(0);
-    //Creates the star
-    this.star = this.add.image(900, 130, "star").setOrigin(0).depth = 100;
+    //Creates the water droplet
+    this.droplet = this.add
+      .image(900, 130, "droplet")
+      .setOrigin(0)
+      .setScale(0.2).depth = 100;
     //Adds instructions to the top left corner
     this.add.text(10, 10, "Click to change character", {
       fontSize: "22px",
