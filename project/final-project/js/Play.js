@@ -74,7 +74,7 @@ class Play extends Phaser.Scene {
       .setScale(1.3);
     // TRIES to have the ground block collide
     //this.ground.setPushable(false);
-    this.physics.add.collider(this.ground, this.player1);
+    this.physics.add.collider(this.player1, this.ground);
 
     //Displays the black floating platform blocks
     this.platform = this.add
