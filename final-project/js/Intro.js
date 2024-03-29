@@ -13,8 +13,12 @@ class Intro extends Phaser.Scene {
   //*
   create() {
     //Displays the text
+    this.add.text(430, 300, "Intro Text Here + a more fun bg", {
+      font: "30px Courier",
+      fill: "#ffffff",
+    });
     this.add
-      .text(580, 500, "Press the ENTER to begin", {
+      .text(580, 600, "Press ENTER to begin", {
         font: "20px Courier",
         fill: "#ffffff",
       })
@@ -27,7 +31,6 @@ class Intro extends Phaser.Scene {
       this.scene.start(`play`);
     });
   }
-
   //*
   //Will constantly be called (draw() equivalent)
   //*
