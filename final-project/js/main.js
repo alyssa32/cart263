@@ -13,7 +13,7 @@ let config = {
     },
   },
   // The scene property has an array of the different scenes
-  scene: [Boot, Play],
+  scene: [Boot, Intro, Play],
 };
 
 // Creates the game using this configuration!
