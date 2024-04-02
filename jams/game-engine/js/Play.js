@@ -66,7 +66,7 @@ class Play extends Phaser.Scene {
   blocks() {
     //Displays the black ground block image
     this.ground = this.add
-      .image(0, 690, "blackGround")
+      .sprite(0, 690, "blackGround")
       .setOrigin(0)
       .setScale(1.3);
     // TRIES to have the ground block collide
@@ -75,7 +75,7 @@ class Play extends Phaser.Scene {
 
     //Displays the black floating platform blocks
     this.platform = this.add
-      .image(720, 330, "blackPlatform1")
+      .sprite(720, 330, "blackPlatform1")
       .setOrigin(0)
       .setScale(0.09).depth = 100;
     this.platform = this.add
@@ -105,7 +105,7 @@ class Play extends Phaser.Scene {
           .image(0, -140, "blackBackground")
           .setOrigin(0);
         //Changes the ground colour to white
-        this.ground = this.add.image(0, 700, "whiteGround").setOrigin(0);
+        this.ground = this.add.sprite(0, 700, "whiteGround").setOrigin(0);
       } else {
         //switches to player 1
         this.currentPlayer = this.player1;
