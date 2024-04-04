@@ -12,6 +12,7 @@ class Play extends Phaser.Scene {
   floor;
   movingPlatformsBlack = [];
   players = [];
+  currentPlayer;
   //*
   //Will be called one time (setup() equivalent)
   //*
@@ -21,6 +22,7 @@ class Play extends Phaser.Scene {
     //Calls functions
     this.player();
     this.blocks();
+    this.onClick();
     //Calls to define cursor keys
     this.cursors = this.input.keyboard.createCursorKeys();
   }
@@ -35,6 +37,8 @@ class Play extends Phaser.Scene {
       .setBounce(0.2)
       .setCollideWorldBounds(true);
     this.players[0].depth = 100;
+    //Sets Player 1 to be the first player to be played
+    this.currentPlayer = this.players[0];
     // Creating Player 2
     this.players[1] = this.physics.add
       .sprite(550, 110, "player2")
@@ -47,6 +51,20 @@ class Play extends Phaser.Scene {
     this.players[1].setPushable(false);
     // //Adds collisions between the players
     this.physics.add.collider(this.players[0], this.players[1]);
+  }
+  //*
+  //Will perform actions if mouse is clicked
+  //*
+  onClick() {
+    this.input.on("pointerdown", () => {
+      if (this.currentPlayer === this.players[0]) {
+        // Switches to player 1
+        this.currentPlayer = this.players[1];
+      } else {
+        // Switches to player 0
+        this.currentPlayer = this.players[0];
+      }
+    });
   }
   //*
   //Creates the Platforms and Asigns them Physics Properties
@@ -75,16 +93,16 @@ class Play extends Phaser.Scene {
   update() {
     //Selected player will move left if the left arrow key is pressed
     if (this.cursors.left.isDown == true) {
-      this.players[0].setVelocityX(-160);
+      this.currentPlayer.setVelocityX(-160);
       //Selected player will move right if the left arrow key is pressed
     } else if (this.cursors.right.isDown == true) {
-      this.players[0].setVelocityX(160);
+      this.currentPlayer.setVelocityX(160);
     } else {
       //If no arrows are pressed, the player will not move left or right
-      this.players[0].setVelocityX(0);
+      this.currentPlayer.setVelocityX(0);
     } //Selected player will move upwards if the left arrow key is pressed and if the player is NOT already in the air
-    if (this.cursors.up.isDown == true && this.players[0].body.onFloor()) {
-      this.players[0].setVelocityY(-330);
+    if (this.cursors.up.isDown == true && this.currentPlayer.body.onFloor()) {
+      this.currentPlayer.setVelocityY(-330);
       window.showit = true;
     }
     //Black Platform Movements

@@ -14,6 +14,7 @@ class Boot extends Phaser.Scene {
     this.load.image("blackBackground", "assets/images/bBackground.png");
     this.load.image("ground", "assets/images/smallPlatform.png");
     this.load.image("whiteGround", "assets/images/ground2.png");
+    this.load.image("blackGround", "assets/images/ground.png");
     this.load.image("droplet", "assets/images/droplet.png");
     this.load.image("player1", "assets/images/player1.png");
     this.load.image("player2", "assets/images/player2.png");
