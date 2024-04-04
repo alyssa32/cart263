@@ -10,8 +10,11 @@ class Play extends Phaser.Scene {
   }
   cursors;
   platforms;
-  movingPlatforms;
+  movingPlatform;
+  movingPlatform2;
+  movingPlatformsBlack = [];
   player1;
+  //let movingPlatforms = [];
   //*
   //Will be called one time (setup() equivalent)
   //*
@@ -46,16 +49,19 @@ class Play extends Phaser.Scene {
     this.platforms = this.physics.add.staticGroup();
     this.platforms.create(700, 870, "ground").setScale(15).refreshBody();
     //Adds physics properties to the moving platforms
-    this.movingPlatform = this.physics.add.image(400, 400, "ground");
-    this.movingPlatform.setImmovable(true);
-    this.movingPlatform.body.allowGravity = false;
-    this.movingPlatform.setVelocityX(50);
-
-    this.platforms.create(600, 600, "ground");
+    this.movingPlatformsBlack[0] = this.physics.add.image(400, 400, "ground");
+    this.movingPlatformsBlack[0].setImmovable(true);
+    this.movingPlatformsBlack[0].body.allowGravity = false;
+    this.movingPlatformsBlack[0].setVelocityX(50);
+    //Second moving platform
+    this.movingPlatformsBlack[1] = this.physics.add.image(500, 600, "ground");
+    this.movingPlatformsBlack[1].setImmovable(true);
+    this.movingPlatformsBlack[1].body.allowGravity = false;
+    this.movingPlatformsBlack[1].setVelocityX(50);
 
     //Adds collisions between the players and the platforms
     this.physics.add.collider(this.player1, this.platforms);
-    this.physics.add.collider(this.player1, this.movingPlatform);
+    this.physics.add.collider(this.player1, this.movingPlatformsBlack);
   }
   //*
   //Will constantly be called (draw() equivalent)
@@ -75,11 +81,18 @@ class Play extends Phaser.Scene {
       this.player1.setVelocityY(-330);
       window.showit = true;
     }
-    //Platform movement
-    if (this.movingPlatform.x >= 500) {
-      this.movingPlatform.setVelocityX(-50);
-    } else if (this.movingPlatform.x <= 300) {
-      this.movingPlatform.setVelocityX(50);
+    //Black Platform Movements
+    //Black Platform 0
+    if (this.movingPlatformsBlack[0].x >= 500) {
+      this.movingPlatformsBlack[0].setVelocityX(-50);
+    } else if (this.movingPlatformsBlack[0].x <= 300) {
+      this.movingPlatformsBlack[0].setVelocityX(50);
+    }
+    //Black Platform 1
+    if (this.movingPlatformsBlack[1].x >= 630) {
+      this.movingPlatformsBlack[1].setVelocityX(-40);
+    } else if (this.movingPlatformsBlack[1].x <= 430) {
+      this.movingPlatformsBlack[1].setVelocityX(40);
     }
   }
 }
