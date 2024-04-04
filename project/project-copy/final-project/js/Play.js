@@ -12,7 +12,6 @@ class Play extends Phaser.Scene {
   floor;
   movingPlatformsBlack = [];
   players = [];
-  player1;
   //*
   //Will be called one time (setup() equivalent)
   //*
@@ -29,14 +28,14 @@ class Play extends Phaser.Scene {
   //Creates the Players and Asigns them Physics Properties
   //*
   player() {
-    // Player 1
+    // Creating Player 1
     this.players[0] = this.physics.add
       .sprite(450, 110, "player1")
       .setScale(0.05)
       .setBounce(0.2)
       .setCollideWorldBounds(true);
     this.players[0].depth = 100;
-    // Player 2
+    // Creating Player 2
     this.players[1] = this.physics.add
       .sprite(550, 110, "player2")
       .setScale(0.035)
@@ -46,6 +45,8 @@ class Play extends Phaser.Scene {
     //Makes the players not pushable
     this.players[0].setPushable(false);
     this.players[1].setPushable(false);
+    // //Adds collisions between the players
+    this.physics.add.collider(this.players[0], this.players[1]);
   }
   //*
   //Creates the Platforms and Asigns them Physics Properties
@@ -64,7 +65,6 @@ class Play extends Phaser.Scene {
     this.movingPlatformsBlack[1].setImmovable(true);
     this.movingPlatformsBlack[1].body.allowGravity = false;
     this.movingPlatformsBlack[1].setVelocityX(50);
-
     //Adds collisions between the players and the platforms
     this.physics.add.collider(this.players, this.floor);
     this.physics.add.collider(this.players, this.movingPlatformsBlack);
