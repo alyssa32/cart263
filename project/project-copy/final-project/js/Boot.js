@@ -10,8 +10,7 @@ class Boot extends Phaser.Scene {
   //Preloads all my images
   //*
   preload() {
-    this.load.image("whiteBackground", "assets/images/wBackground.png");
-    this.load.image("blackBackground", "assets/images/bBackground.png");
+    this.load.image("city", "assets/images/background.png");
     this.load.image("ground", "assets/images/smallPlatform.png");
     this.load.image("whiteGround", "assets/images/ground2.png");
     this.load.image("blackGround", "assets/images/ground.png");

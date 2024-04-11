@@ -9,7 +9,7 @@ let config = {
     default: "arcade",
     arcade: {
       gravity: { y: 500 },
-      debug: true,
+      debug: false,
     },
   },
   // The scene property has an array of the different scenes

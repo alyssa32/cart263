@@ -17,8 +17,10 @@ class Play extends Phaser.Scene {
   //Will be called one time (setup() equivalent)
   //*
   create() {
-    //Creates the background
-    this.background = this.add.image(0, -140, "whiteBackground").setOrigin(0);
+    //Adds the city background image
+    this.city = this.add.image(0, -50, "city").setOrigin(0).setScale(2.6);
+    //Colours the background black
+    this.cameras.main.setBackgroundColor("#ffffff");
     //Calls functions
     this.player();
     this.blocks();
@@ -60,9 +62,13 @@ class Play extends Phaser.Scene {
       if (this.currentPlayer === this.players[0]) {
         // Switches to player 1
         this.currentPlayer = this.players[1];
+        this.cameras.main.setBackgroundColor("#000000");
+        this.add.rectangle(0, 753, 2850, 100, 0xffffff);
       } else {
         // Switches to player 0
         this.currentPlayer = this.players[0];
+        this.cameras.main.setBackgroundColor("#ffffff");
+        this.add.rectangle(0, 753, 2850, 100, 0x000000);
       }
     });
   }
@@ -72,14 +78,16 @@ class Play extends Phaser.Scene {
   blocks() {
     //Adds physics properties to the ground
     this.floor = this.physics.add.staticGroup();
-    this.floor.create(700, 870, "ground").setScale(15).refreshBody();
+    this.floor.create(700, 860, "ground").setScale(15).refreshBody();
+    //Draws a black rectangle over the ground
+    var rect = this.add.rectangle(0, 753, 2850, 100, 0x000000);
     //Creates Black Moving Platform 0 and adds physics
     this.movingPlatformsBlack[0] = this.physics.add.image(400, 400, "ground");
     this.movingPlatformsBlack[0].setImmovable(true);
     this.movingPlatformsBlack[0].body.allowGravity = false;
     this.movingPlatformsBlack[0].setVelocityX(50);
     //Creates Black Moving Platform 1 and adds physics
-    this.movingPlatformsBlack[1] = this.physics.add.image(500, 600, "ground");
+    this.movingPlatformsBlack[1] = this.physics.add.image(500, 611, "ground");
     this.movingPlatformsBlack[1].setImmovable(true);
     this.movingPlatformsBlack[1].body.allowGravity = false;
     this.movingPlatformsBlack[1].setVelocityX(50);
