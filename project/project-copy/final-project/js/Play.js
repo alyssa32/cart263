@@ -21,6 +21,11 @@ class Play extends Phaser.Scene {
     this.city = this.add.image(0, -50, "city").setOrigin(0).setScale(2.6);
     //Colours the background black
     this.cameras.main.setBackgroundColor("#ffffff");
+    //Displays the character switching text in the top left corner
+    this.add.text(10, 10, "Click to change character", {
+      fontSize: "22px",
+      fill: "#dedede",
+    });
     //Calls functions
     this.player();
     this.blocks();
@@ -62,12 +67,16 @@ class Play extends Phaser.Scene {
       if (this.currentPlayer === this.players[0]) {
         // Switches to player 1
         this.currentPlayer = this.players[1];
+        //Changes background colour to black
         this.cameras.main.setBackgroundColor("#000000");
+        //Changes ground to white
         this.add.rectangle(0, 753, 2850, 100, 0xffffff);
       } else {
         // Switches to player 0
         this.currentPlayer = this.players[0];
+        //Changes background colour to white
         this.cameras.main.setBackgroundColor("#ffffff");
+        //Changes ground to black
         this.add.rectangle(0, 753, 2850, 100, 0x000000);
       }
     });
