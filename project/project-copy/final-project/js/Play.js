@@ -11,6 +11,7 @@ class Play extends Phaser.Scene {
   cursors;
   floor;
   movingPlatformsBlack = [];
+  movingPlatformsWhite = [];
   players = [];
   currentPlayer;
   //*
@@ -91,7 +92,7 @@ class Play extends Phaser.Scene {
     //Draws a black rectangle over the ground
     var rect = this.add.rectangle(0, 753, 2850, 100, 0x000000);
     //Creates Black Moving Platform 0 and adds physics
-    this.movingPlatformsBlack[0] = this.physics.add.image(400, 400, "ground");
+    this.movingPlatformsBlack[0] = this.physics.add.image(500, 400, "ground");
     this.movingPlatformsBlack[0].setImmovable(true);
     this.movingPlatformsBlack[0].body.allowGravity = false;
     this.movingPlatformsBlack[0].setVelocityX(50);
@@ -100,9 +101,28 @@ class Play extends Phaser.Scene {
     this.movingPlatformsBlack[1].setImmovable(true);
     this.movingPlatformsBlack[1].body.allowGravity = false;
     this.movingPlatformsBlack[1].setVelocityX(50);
+    //Creates White Moving Platform 0 and adds physics
+    this.movingPlatformsWhite[0] = this.physics.add.image(
+      800,
+      505,
+      "groundWhite"
+    );
+    this.movingPlatformsWhite[0].setImmovable(true);
+    this.movingPlatformsWhite[0].body.allowGravity = false;
+    this.movingPlatformsWhite[0].setVelocityX(50);
+    //Creates White Moving Platform 1 and adds physics
+    this.movingPlatformsWhite[1] = this.physics.add.image(
+      300,
+      300,
+      "groundWhite"
+    );
+    this.movingPlatformsWhite[1].setImmovable(true);
+    this.movingPlatformsWhite[1].body.allowGravity = false;
+    this.movingPlatformsWhite[1].setVelocityY(50);
     //Adds collisions between the players and the platforms
     this.physics.add.collider(this.players, this.floor);
     this.physics.add.collider(this.players, this.movingPlatformsBlack);
+    this.physics.add.collider(this.players, this.movingPlatformsWhite);
   }
   //*
   //Will constantly be called (draw() equivalent)
@@ -124,16 +144,29 @@ class Play extends Phaser.Scene {
     }
     //Black Platform Movements
     //Black Platform 0
-    if (this.movingPlatformsBlack[0].x >= 500) {
+    if (this.movingPlatformsBlack[0].x >= 650) {
       this.movingPlatformsBlack[0].setVelocityX(-50);
-    } else if (this.movingPlatformsBlack[0].x <= 300) {
+    } else if (this.movingPlatformsBlack[0].x <= 550) {
       this.movingPlatformsBlack[0].setVelocityX(50);
     }
     //Black Platform 1
     if (this.movingPlatformsBlack[1].x >= 630) {
       this.movingPlatformsBlack[1].setVelocityX(-40);
-    } else if (this.movingPlatformsBlack[1].x <= 430) {
+    } else if (this.movingPlatformsBlack[1].x <= 500) {
       this.movingPlatformsBlack[1].setVelocityX(40);
+    }
+    //White Platform Movements
+    //White Platform 0
+    if (this.movingPlatformsWhite[0].x >= 900) {
+      this.movingPlatformsWhite[0].setVelocityX(-50);
+    } else if (this.movingPlatformsWhite[0].x <= 800) {
+      this.movingPlatformsWhite[0].setVelocityX(50);
+    }
+    //White Platform 1
+    if (this.movingPlatformsWhite[1].y >= 380) {
+      this.movingPlatformsWhite[1].setVelocityY(-40);
+    } else if (this.movingPlatformsWhite[1].y <= 290) {
+      this.movingPlatformsWhite[1].setVelocityY(40);
     }
   }
 }
