@@ -23,14 +23,19 @@ class Play extends Phaser.Scene {
     //Colours the background black
     this.cameras.main.setBackgroundColor("#ffffff");
     //Displays the character switching text in the top left corner
-    this.add.text(10, 10, "Click to change character", {
+    this.add.text(15, 10, "Click to change character", {
       fontSize: "22px",
       fill: "#dedede",
     });
+    this.can = this.add
+      .image(1300, 0, "wateringCan1")
+      .setOrigin(0)
+      .setScale(0.15);
     //Calls functions
     this.player();
     this.blocks();
     this.onClick();
+    this.water();
     //Calls to define cursor keys
     this.cursors = this.input.keyboard.createCursorKeys();
   }
@@ -40,7 +45,7 @@ class Play extends Phaser.Scene {
   player() {
     // Creating Player 1
     this.players[0] = this.physics.add
-      .sprite(450, 110, "player1")
+      .sprite(300, 120, "player1")
       .setScale(0.05)
       .setBounce(0.2)
       .setCollideWorldBounds(true);
@@ -49,14 +54,14 @@ class Play extends Phaser.Scene {
     this.currentPlayer = this.players[0];
     // Creating Player 2
     this.players[1] = this.physics.add
-      .sprite(550, 110, "player2")
+      .sprite(300, 60, "player2")
       .setScale(0.035)
       .setBounce(0.2)
       .setCollideWorldBounds(true);
     this.players[1].depth = 100;
     //Makes the players not pushable
-    this.players[0].setPushable(false);
-    this.players[1].setPushable(false);
+    //this.players[0].setPushable(false);
+    //this.players[1].setPushable(false);
     // //Adds collisions between the players
     this.physics.add.collider(this.players[0], this.players[1]);
   }
@@ -123,6 +128,32 @@ class Play extends Phaser.Scene {
     this.physics.add.collider(this.players, this.floor);
     this.physics.add.collider(this.players, this.movingPlatformsBlack);
     this.physics.add.collider(this.players, this.movingPlatformsWhite);
+  }
+  //*
+  //Has Everything to Do With the Water Droplet
+  //*
+  water() {
+    //Displays the droplet image
+    this.droplet = this.add
+      .image(340, 190, "droplet")
+      .setOrigin(0)
+      .setScale(0.2);
+    //Adds a collider between the droplet and player 0
+    this.physics.add.collider(this.droplet, this.players[0]);
+    this.physics.add.overlap(
+      this.players[0],
+      this.droplet,
+      this.collectDroplet,
+      null,
+      this
+    );
+  }
+  //*
+  //Will Collect the Droplet when Collided with a Player
+  //*
+  collectDroplet(players, droplet) {
+    console.log("test");
+    droplet.disableBody(true, true);
   }
   //*
   //Will constantly be called (draw() equivalent)
