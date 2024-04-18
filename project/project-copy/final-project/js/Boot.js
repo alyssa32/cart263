@@ -36,7 +36,7 @@ class Boot extends Phaser.Scene {
     };
     this.add.text(loading.x, loading.y, loading.string, style);
     //When the Boot scene starts up, it refers the player to the `intro` scene
-    this.scene.start(`start`);
+    this.scene.start(`play`);
   }
 
   update() {}

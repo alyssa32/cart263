@@ -144,7 +144,7 @@ class Play extends Phaser.Scene {
       .setOrigin(0)
       .setScale(0.2);
     //Adds a collider between the droplet and player 0
-    this.physics.add.collider(this.droplet, this.players[0]);
+    //this.physics.add.collider(this.droplet, this.players[0]);
     this.physics.add.overlap(
       this.players[0],
       this.droplet,

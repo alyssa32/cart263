@@ -11,7 +11,13 @@ class Start extends Phaser.Scene {
   //*
   //Will be called one time (setup() equivalent)
   //*
-  create() {}
+  create() {
+    // Displays the intro text
+    this.add.text(100, 100, "The nature in the year 3024 is very limitied.", {
+      fontSize: "22px",
+      fill: "#dedede",
+    });
+  }
   //*
   //Will constantly be called (draw() equivalent)
   //*
