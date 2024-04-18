@@ -23,9 +23,13 @@ class Play2 extends Phaser.Scene {
     //Colours the background black
     this.cameras.main.setBackgroundColor("#ffffff");
     this.can = this.add
-      .image(1300, 0, "wateringCan1")
+      .image(1300, 0, "wateringCan2")
       .setOrigin(0)
       .setScale(0.15);
+    this.add.text(1325, 80, "1/3", {
+      fontSize: "22px",
+      fill: "#dedede",
+    });
     //Calls functions
     this.player();
     this.blocks();

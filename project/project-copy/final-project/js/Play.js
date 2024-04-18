@@ -27,10 +27,15 @@ class Play extends Phaser.Scene {
       fontSize: "22px",
       fill: "#dedede",
     });
+    //Displays the watering can image and text in the top right corner
     this.can = this.add
       .image(1300, 0, "wateringCan1")
       .setOrigin(0)
       .setScale(0.15);
+    this.add.text(1325, 80, "0/3", {
+      fontSize: "22px",
+      fill: "#dedede",
+    });
     //Calls functions
     this.player();
     this.blocks();

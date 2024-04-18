@@ -17,6 +17,9 @@ class Boot extends Phaser.Scene {
     this.load.image("player1", "assets/images/player1.png");
     this.load.image("player2", "assets/images/player2.png");
     this.load.image("wateringCan1", "assets/images/wateringCan1.png");
+    this.load.image("wateringCan2", "assets/images/wateringCan2.png");
+    this.load.image("wateringCan3", "assets/images/wateringCan3.png");
+    this.load.image("wateringCan4", "assets/images/wateringCan4.png");
   }
   //*
   //Adds the text and switches states when loaded
@@ -33,7 +36,7 @@ class Boot extends Phaser.Scene {
     };
     this.add.text(loading.x, loading.y, loading.string, style);
     //When the Boot scene starts up, it refers the player to the `intro` scene
-    this.scene.start(`play2`);
+    this.scene.start(`start`);
   }
 
   update() {}
