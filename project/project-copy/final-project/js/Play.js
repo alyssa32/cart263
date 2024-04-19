@@ -139,14 +139,15 @@ class Play extends Phaser.Scene {
   //*
   water() {
     //Displays the droplet image
-    this.droplet = this.add
-      .image(340, 190, "droplet")
+    this.droplet = this.physics.add
+      .sprite(340, 190, "droplet")
       .setOrigin(0)
-      .setScale(0.2);
+      .setScale(0.2)
+      .setCollideWorldBounds(true);
+    this.physics.add.collider(this.droplet, this.floor);
     //Adds a collider between the droplet and player 0
-    //this.physics.add.collider(this.droplet, this.players[0]);
     this.physics.add.overlap(
-      this.players[0],
+      this.players,
       this.droplet,
       this.collectDroplet,
       null,
