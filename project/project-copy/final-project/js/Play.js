@@ -50,7 +50,7 @@ class Play extends Phaser.Scene {
   player() {
     // Creating Player 1
     this.players[0] = this.physics.add
-      .sprite(300, 120, "player1")
+      .sprite(260, 120, "player1")
       .setScale(0.05)
       .setBounce(0.2)
       .setCollideWorldBounds(true);
@@ -59,7 +59,7 @@ class Play extends Phaser.Scene {
     this.currentPlayer = this.players[0];
     // Creating Player 2
     this.players[1] = this.physics.add
-      .sprite(300, 60, "player2")
+      .sprite(260, 60, "player2")
       .setScale(0.035)
       .setBounce(0.2)
       .setCollideWorldBounds(true);
@@ -99,6 +99,8 @@ class Play extends Phaser.Scene {
     //Adds physics properties to the ground
     this.floor = this.physics.add.staticGroup();
     this.floor.create(700, 860, "ground").setScale(15).refreshBody();
+    //Creates the hidden rectangle the droplet sits on to prevent it from falling
+    this.floor.create(342, 130, "ground").setScale(0.1).refreshBody();
     //Draws a black rectangle over the ground
     var rect = this.add.rectangle(0, 753, 2850, 100, 0x000000);
     //Creates Black Moving Platform 0 and adds physics
@@ -140,11 +142,12 @@ class Play extends Phaser.Scene {
   water() {
     //Displays the droplet image
     this.droplet = this.physics.add
-      .sprite(340, 190, "droplet")
+      .sprite(300, 80, "droplet")
       .setOrigin(0)
       .setScale(0.2)
       .setCollideWorldBounds(true);
     this.physics.add.collider(this.droplet, this.floor);
+    this.physics.add.collider(this.droplet, this.hiddenPlatform);
     //Adds a collider between the droplet and player 0
     this.physics.add.overlap(
       this.players,
