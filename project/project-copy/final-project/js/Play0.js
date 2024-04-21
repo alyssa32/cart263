@@ -139,7 +139,7 @@ class Play0 extends Phaser.Scene {
     this.arrow.body.allowGravity = false;
     //If the players touch the arrow sign, it will change scenes
     this.physics.add.overlap(
-      this.players,
+      this.players[0],
       this.arrow,
       this.switchScene,
       null,
