@@ -22,12 +22,8 @@ class Play3 extends Phaser.Scene {
     this.city = this.add.image(710, 350, "city0").setScale(0.43);
     //Colours the background black
     this.cameras.main.setBackgroundColor("#ffffff");
-    //Displays the watering can image and text in the top right corner
-    this.can = this.add
-      .image(1300, 0, "wateringCan4")
-      .setOrigin(0)
-      .setScale(0.15);
-    this.add.text(1325, 80, "2/2", {
+    //Adds the text under the watering can
+    this.add.text(678, 375, "2/2", {
       fontSize: "22px",
       fill: "#dedede",
     });
@@ -35,7 +31,7 @@ class Play3 extends Phaser.Scene {
     this.player();
     this.blocks();
     this.onClick();
-    this.nextSign();
+    this.water();
     //Calls to define cursor keys
     this.cursors = this.input.keyboard.createCursorKeys();
   }
@@ -45,7 +41,7 @@ class Play3 extends Phaser.Scene {
   player() {
     // Creating Player 1
     this.players[0] = this.physics.add
-      .sprite(130, 665, "player1")
+      .sprite(100, 660, "player1")
       .setScale(0.05)
       .setBounce(0.2)
       .setCollideWorldBounds(true);
@@ -111,33 +107,28 @@ class Play3 extends Phaser.Scene {
   //*
   //Has Everything to Do With the "Next" Sign"
   //*
-  nextSign() {
-    //Displays the Sign image
-    this.sign = this.physics.add
-      .sprite(610, 280, "frame")
+  water() {
+    //Displays the watering can image
+    this.wateringCan = this.physics.add
+      .sprite(655, 0, "wateringCan4")
       .setOrigin(0)
-      .setScale(0.2)
+      .setScale(0.15)
       .setCollideWorldBounds(true);
-    this.physics.add.collider(this.sign, this.hiddenBlock);
-    //Adds a collider between the Sign and the players
+    this.physics.add.collider(this.wateringCan, this.hiddenBlock);
+    //Adds a collider between the can and the players
     this.physics.add.overlap(
-      this.players,
-      this.sign,
-      this.collectSign,
+      this.players[1],
+      this.wateringCan,
+      this.collectWater,
       null,
       this
     );
-    //Display the "Next" text
-    this.add.text(655, 310, "NEXT", {
-      fontSize: "34px",
-      fill: "#ffbc1f",
-    });
   }
   //*
   //Will Collect the sign when Collided with a Player
   //*
-  collectSign(players, sign) {
-    sign.disableBody(true, true);
+  collectWater(players, wateringCan) {
+    wateringCan.disableBody(true, true);
     this.scene.start(`end`);
   }
   //*
@@ -161,7 +152,7 @@ class Play3 extends Phaser.Scene {
     //White Platform Movements
     if (this.movingPlatformsWhite.y >= 625) {
       this.movingPlatformsWhite.setVelocityY(-50);
-    } else if (this.movingPlatformsWhite.y <= 525) {
+    } else if (this.movingPlatformsWhite.y <= 520) {
       this.movingPlatformsWhite.setVelocityY(50);
     }
   }

@@ -47,7 +47,7 @@ class Play0 extends Phaser.Scene {
   player() {
     // Creating Player 1
     this.players[0] = this.physics.add
-      .sprite(400, 465, "player1")
+      .sprite(100, 660, "player1")
       .setScale(0.05)
       .setBounce(0.2)
       .setCollideWorldBounds(true);
@@ -56,7 +56,7 @@ class Play0 extends Phaser.Scene {
     this.currentPlayer = this.players[0];
     // Creating Player 2
     this.players[1] = this.physics.add
-      .sprite(340, 670, "player2")
+      .sprite(40, 670, "player2")
       .setScale(0.035)
       .setBounce(0.2)
       .setCollideWorldBounds(true);

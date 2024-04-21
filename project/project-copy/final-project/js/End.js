@@ -12,10 +12,12 @@ class End extends Phaser.Scene {
   //Will be called one time (setup() equivalent)
   //*
   create() {
+    //Dislays the image of the frame
+    this.add.image(710, 395, "frame").setScale(0.45);
+    //Colours the background grey
+    this.cameras.main.setBackgroundColor("#000000");
     //Dislays the image of both characters
     this.add.image(710, 330, "playersGrown").setScale(0.4);
-    //Colours the background grey
-    this.cameras.main.setBackgroundColor("#ebebeb");
     //Displays the "Restart" button
     const button = this.add
       .text(730, 600, "Restart", {
