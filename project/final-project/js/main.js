@@ -9,11 +9,11 @@ let config = {
     default: "arcade",
     arcade: {
       gravity: { y: 500 },
-      debug: true,
+      debug: false,
     },
   },
   // The scene property has an array of the different scenes
-  scene: [Boot, Intro, Play, End],
+  scene: [Boot, Start, Play0, Play1, Play2, Play3, End],
 };
 
 // Creates the game using this configuration!

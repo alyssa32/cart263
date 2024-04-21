@@ -10,17 +10,23 @@ class Boot extends Phaser.Scene {
   //Preloads all my images
   //*
   preload() {
-    this.load.image("whiteBackground", "assets/images/wBackground.png");
-    this.load.image("blackBackground", "assets/images/bBackground.png");
-    this.load.image("whitePlatform1", "assets/images/wPlatform1.png");
-    this.load.image("whitePlatform2", "assets/images/wPlatform2.png");
-    this.load.image("blackPlatform1", "assets/images/bPlatform1.png");
-    this.load.image("blackPlatform2", "assets/images/bPlatform2.png");
-    this.load.image("blackGround", "assets/images/ground.png");
-    this.load.image("whiteGround", "assets/images/ground2.png");
+    this.load.image("city", "assets/images/background.png");
+    this.load.image("ground", "assets/images/smallPlatform.png");
+    this.load.image("groundWhite", "assets/images/smallPlatformWhite.png");
     this.load.image("droplet", "assets/images/droplet.png");
     this.load.image("player1", "assets/images/player1.png");
     this.load.image("player2", "assets/images/player2.png");
+    this.load.image("wateringCan1", "assets/images/wateringCan1.png");
+    this.load.image("wateringCan2", "assets/images/wateringCan2.png");
+    this.load.image("wateringCan3", "assets/images/wateringCan3.png");
+    this.load.image("wateringCan4", "assets/images/wateringCan4.png");
+    this.load.image("forestBg", "assets/images/forestBG.png");
+    this.load.image("city0", "assets/images/background0.png");
+    this.load.image("treeTop", "assets/images/treeTop.png");
+    this.load.image("playersGrown", "assets/images/playersGrown.png");
+    this.load.image("button", "assets/images/littleButton.png");
+    this.load.image("arrow", "assets/images/arrow.png");
+    this.load.image("frame", "assets/images/frame.png");
   }
   //*
   //Adds the text and switches states when loaded
@@ -37,7 +43,7 @@ class Boot extends Phaser.Scene {
     };
     this.add.text(loading.x, loading.y, loading.string, style);
     //When the Boot scene starts up, it refers the player to the `intro` scene
-    this.scene.start(`intro`);
+    this.scene.start(`play0`);
   }
 
   update() {}
