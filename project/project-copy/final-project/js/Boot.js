@@ -22,8 +22,9 @@ class Boot extends Phaser.Scene {
     this.load.image("wateringCan4", "assets/images/wateringCan4.png");
     this.load.image("forestBg", "assets/images/forestBG.png");
     this.load.image("city0", "assets/images/background0.png");
-    this.load.image("treeTop", "assets/images/leaves.png");
+    this.load.image("treeTop", "assets/images/treeTop.png");
     this.load.image("playersGrown", "assets/images/playersGrown.png");
+    this.load.image("button", "assets/images/littleButton.png");
   }
   //*
   //Adds the text and switches states when loaded
