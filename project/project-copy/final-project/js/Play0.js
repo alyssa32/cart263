@@ -15,6 +15,7 @@ class Play0 extends Phaser.Scene {
   hiddenBlock;
   players = [];
   currentPlayer;
+  changePlayer;
   //*
   //Will be called one time (setup() equivalent)
   //*
@@ -119,12 +120,6 @@ class Play0 extends Phaser.Scene {
     this.treeTop.setImmovable(true);
     this.treeTop.body.allowGravity = false;
     this.physics.add.collider(this.players, this.treeTop);
-    //Adds the text messaging the player to click the screen
-    this.add.text(715, 520, "Click \nto Change\nCharacter", {
-      fontSize: "23px",
-      fill: "#ffffff",
-      align: "center",
-    });
   }
   //*
   //If the button is pressed, it grows the tree
@@ -133,7 +128,7 @@ class Play0 extends Phaser.Scene {
     //Lowers the button
     button.disableBody(true, true);
     //Grows the tree
-    this.treeTop.setPosition(779, 536);
+    this.treeTop.setPosition(779, 536).depth = 100;
   }
   //*
   //Draws the Tree and adds physics
@@ -175,6 +170,20 @@ class Play0 extends Phaser.Scene {
     if (this.cursors.up.isDown == true && this.currentPlayer.body.onFloor()) {
       this.currentPlayer.setVelocityY(-330);
       window.showit = true;
+    }
+    //If player 0 passed an x value, the text will display
+    if (this.players[0].x >= 620) {
+      //Adds the text messaging the player to click the screen
+      this.changePlayer = this.add.text(
+        715,
+        510,
+        "Click \nto Change\nCharacter",
+        {
+          fontSize: "26px",
+          fill: "#ffffff",
+          align: "center",
+        }
+      );
     }
   }
 }
