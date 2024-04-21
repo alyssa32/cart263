@@ -119,6 +119,12 @@ class Play0 extends Phaser.Scene {
     this.treeTop.setImmovable(true);
     this.treeTop.body.allowGravity = false;
     this.physics.add.collider(this.players, this.treeTop);
+    //Adds the text messaging the player to click the screen
+    this.add.text(715, 520, "Click \nto Change\nCharacter", {
+      fontSize: "23px",
+      fill: "#ffffff",
+      align: "center",
+    });
   }
   //*
   //If the button is pressed, it grows the tree
