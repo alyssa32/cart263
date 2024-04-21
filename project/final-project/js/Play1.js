@@ -124,7 +124,7 @@ class Play1 extends Phaser.Scene {
   water() {
     //Displays the droplet image
     this.droplet = this.physics.add
-      .sprite(1000, 150, "droplet")
+      .sprite(1000, 0, "droplet")
       .setOrigin(0)
       .setScale(0.2)
       .setCollideWorldBounds(true);
@@ -165,7 +165,7 @@ class Play1 extends Phaser.Scene {
       window.showit = true;
     }
     //White Platform Movement
-    if (this.movingPlatformsWhite.y >= 500) {
+    if (this.movingPlatformsWhite.y >= 515) {
       this.movingPlatformsWhite.setVelocityY(-40);
     } else if (this.movingPlatformsWhite.y <= 400) {
       this.movingPlatformsWhite.setVelocityY(40);
