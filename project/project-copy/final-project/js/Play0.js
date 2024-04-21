@@ -37,7 +37,7 @@ class Play0 extends Phaser.Scene {
     this.ground();
     this.tree();
     this.onClick();
-    this.water();
+    this.arrowDisplay();
     //Calls to define cursor keys
     this.cursors = this.input.keyboard.createCursorKeys();
   }
@@ -110,6 +110,9 @@ class Play0 extends Phaser.Scene {
     this.physics.add.collider(this.players, this.floor);
     this.physics.add.collider(this.players[1], this.button);
   }
+  //*
+  //Draws the Tree and adds physics
+  //*
   tree() {
     //Adds physics properties to the tree top
     this.treeTop = this.physics.add.image(779, 558, "treeTop").setScale(0.49);
@@ -127,21 +130,18 @@ class Play0 extends Phaser.Scene {
     this.treeTop.setPosition(779, 536);
   }
   //*
-  //Has Everything to Do With the Water Droplet
+  //Draws the Tree and adds physics
   //*
-  water() {
-    //Displays the droplet image
-    this.droplet = this.physics.add
-      .sprite(1400, 550, "droplet")
-      .setOrigin(0)
-      .setScale(0.2)
-      .setCollideWorldBounds(true);
-    this.physics.add.collider(this.droplet, this.floor);
-    //Adds a collider between the droplet and player 0
+  arrowDisplay() {
+    //Draws the arrow image
+    this.arrow = this.physics.add.image(1300, 660, "arrow").setScale(0.1);
+    this.arrow.setImmovable(true);
+    this.arrow.body.allowGravity = false;
+    //If the players touch the arrow sign, it will change scenes
     this.physics.add.overlap(
       this.players,
-      this.droplet,
-      this.collectDroplet,
+      this.arrow,
+      this.switchScene,
       null,
       this
     );
@@ -149,8 +149,7 @@ class Play0 extends Phaser.Scene {
   //*
   //Will Collect the Droplet when Collided with a Player
   //*
-  collectDroplet(players, droplet) {
-    droplet.disableBody(true, true);
+  switchScene(players, arrow) {
     this.scene.start(`play1`);
   }
   //*

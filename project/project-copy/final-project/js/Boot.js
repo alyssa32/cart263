@@ -25,6 +25,7 @@ class Boot extends Phaser.Scene {
     this.load.image("treeTop", "assets/images/treeTop.png");
     this.load.image("playersGrown", "assets/images/playersGrown.png");
     this.load.image("button", "assets/images/littleButton.png");
+    this.load.image("arrow", "assets/images/arrow.png");
   }
   //*
   //Adds the text and switches states when loaded
@@ -41,7 +42,7 @@ class Boot extends Phaser.Scene {
     };
     this.add.text(loading.x, loading.y, loading.string, style);
     //When the Boot scene starts up, it refers the player to the `intro` scene
-    this.scene.start(`play0`);
+    this.scene.start(`play2`);
   }
 
   update() {}
