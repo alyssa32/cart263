@@ -1,11 +1,11 @@
-class Play extends Phaser.Scene {
+class Play1 extends Phaser.Scene {
   //*
   //Acts as the `setup` of the class
   //*
   constructor() {
     super({
       // Key name to reffer to this class
-      key: `play`,
+      key: `play1`,
     });
   }
   cursors;
