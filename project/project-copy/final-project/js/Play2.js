@@ -160,7 +160,7 @@ class Play2 extends Phaser.Scene {
   //*
   collectDroplet(players, droplet) {
     droplet.disableBody(true, true);
-    this.scene.start(`end`);
+    this.scene.start(`play3`);
   }
   //*
   //Will constantly be called (draw() equivalent)

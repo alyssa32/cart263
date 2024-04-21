@@ -41,7 +41,7 @@ class End extends Phaser.Scene {
     });
     //Brings the player back to the first level if the button is pressed
     button.on("pointerdown", () => {
-      this.scene.start(`play1`);
+      this.scene.start(`play0`);
     });
   }
   //*

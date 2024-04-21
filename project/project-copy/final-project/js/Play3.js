@@ -35,7 +35,7 @@ class Play3 extends Phaser.Scene {
     this.player();
     this.blocks();
     this.onClick();
-    this.water();
+    this.nextSign();
     //Calls to define cursor keys
     this.cursors = this.input.keyboard.createCursorKeys();
   }
@@ -94,9 +94,9 @@ class Play3 extends Phaser.Scene {
     //Adds physics properties to the ground
     this.floor = this.physics.add.staticGroup();
     this.floor.create(700, 860, "ground").setScale(15).refreshBody();
-    //Creates the hidden rectangle the droplet sits on to prevent it from falling
+    //Creates the hidden rectangle the "next" sign sits on to prevent it from falling
     this.hiddenBlock = this.physics.add.staticGroup();
-    this.hiddenBlock.create(300, 120, "ground2").setScale(0.01).refreshBody();
+    this.hiddenBlock.create(700, 370, "ground2").setScale(0.01).refreshBody();
     //Draws a black rectangle over the ground
     var rect = this.add.rectangle(0, 753, 2850, 100, 0x000000);
     //Creates White Moving Platform 0 and adds physics
@@ -109,31 +109,35 @@ class Play3 extends Phaser.Scene {
     this.physics.add.collider(this.players, this.movingPlatformsWhite);
   }
   //*
-  //Has Everything to Do With the Water Droplet
+  //Has Everything to Do With the "Next" Sign"
   //*
-  water() {
-    //Displays the droplet image
-    this.droplet = this.physics.add
-      .sprite(280, 80, "droplet")
+  nextSign() {
+    //Displays the Sign image
+    this.sign = this.physics.add
+      .sprite(610, 280, "frame")
       .setOrigin(0)
       .setScale(0.2)
       .setCollideWorldBounds(true);
-    this.physics.add.collider(this.droplet, this.hiddenBlock);
-    this.physics.add.collider(this.droplet, this.hiddenPlatform);
-    //Adds a collider between the droplet and player 0
+    this.physics.add.collider(this.sign, this.hiddenBlock);
+    //Adds a collider between the Sign and the players
     this.physics.add.overlap(
       this.players,
-      this.droplet,
-      this.collectDroplet,
+      this.sign,
+      this.collectSign,
       null,
       this
     );
+    //Display the "Next" text
+    this.add.text(655, 310, "NEXT", {
+      fontSize: "34px",
+      fill: "#ffbc1f",
+    });
   }
   //*
-  //Will Collect the Droplet when Collided with a Player
+  //Will Collect the sign when Collided with a Player
   //*
-  collectDroplet(players, droplet) {
-    droplet.disableBody(true, true);
+  collectSign(players, sign) {
+    sign.disableBody(true, true);
     this.scene.start(`end`);
   }
   //*
