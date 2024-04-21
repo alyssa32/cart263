@@ -10,6 +10,7 @@ class Play2 extends Phaser.Scene {
   }
   cursors;
   floor;
+  hiddenBlock;
   movingPlatformsBlack = [];
   movingPlatformsWhite = [];
   players = [];
@@ -22,11 +23,12 @@ class Play2 extends Phaser.Scene {
     this.city = this.add.image(0, -50, "city").setOrigin(0).setScale(2.6);
     //Colours the background black
     this.cameras.main.setBackgroundColor("#ffffff");
+    //Displays the watering can image and text in the top right corner
     this.can = this.add
       .image(1300, 0, "wateringCan2")
       .setOrigin(0)
       .setScale(0.15);
-    this.add.text(1325, 80, "1/3", {
+    this.add.text(1325, 80, "1/2", {
       fontSize: "22px",
       fill: "#dedede",
     });
@@ -44,7 +46,7 @@ class Play2 extends Phaser.Scene {
   player() {
     // Creating Player 1
     this.players[0] = this.physics.add
-      .sprite(300, 120, "player1")
+      .sprite(100, 665, "player1")
       .setScale(0.05)
       .setBounce(0.2)
       .setCollideWorldBounds(true);
@@ -53,7 +55,7 @@ class Play2 extends Phaser.Scene {
     this.currentPlayer = this.players[0];
     // Creating Player 2
     this.players[1] = this.physics.add
-      .sprite(300, 60, "player2")
+      .sprite(40, 670, "player2")
       .setScale(0.035)
       .setBounce(0.2)
       .setCollideWorldBounds(true);
@@ -93,6 +95,9 @@ class Play2 extends Phaser.Scene {
     //Adds physics properties to the ground
     this.floor = this.physics.add.staticGroup();
     this.floor.create(700, 860, "ground").setScale(15).refreshBody();
+    //Creates the hidden rectangle the droplet sits on to prevent it from falling
+    this.hiddenBlock = this.physics.add.staticGroup();
+    this.hiddenBlock.create(300, 120, "ground2").setScale(0.01).refreshBody();
     //Draws a black rectangle over the ground
     var rect = this.add.rectangle(0, 753, 2850, 100, 0x000000);
     //Creates Black Moving Platform 0 and adds physics
@@ -133,14 +138,16 @@ class Play2 extends Phaser.Scene {
   //*
   water() {
     //Displays the droplet image
-    this.droplet = this.add
-      .image(340, 190, "droplet")
+    this.droplet = this.physics.add
+      .sprite(280, 80, "droplet")
       .setOrigin(0)
-      .setScale(0.2);
+      .setScale(0.2)
+      .setCollideWorldBounds(true);
+    this.physics.add.collider(this.droplet, this.hiddenBlock);
+    this.physics.add.collider(this.droplet, this.hiddenPlatform);
     //Adds a collider between the droplet and player 0
-    this.physics.add.collider(this.droplet, this.players[0]);
     this.physics.add.overlap(
-      this.players[0],
+      this.players,
       this.droplet,
       this.collectDroplet,
       null,
