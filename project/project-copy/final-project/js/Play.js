@@ -135,7 +135,6 @@ class Play extends Phaser.Scene {
       this.players,
       this.droplet,
       this.collectDroplet,
-      this.gotWater,
       null,
       this
     );
@@ -143,15 +142,13 @@ class Play extends Phaser.Scene {
   //*
   //Will switch to the next level once one of the players collides with the droplet
   //*
-  gotWater() {
-    this.scene.switch(`play2`);
-  }
+  gotWater() {}
   //*
   //Will Collect the Droplet when Collided with a Player
   //*
   collectDroplet(players, droplet) {
-    console.log("test");
     droplet.disableBody(true, true);
+    this.scene.start(`play2`);
   }
   //*
   //Will constantly be called (draw() equivalent)
