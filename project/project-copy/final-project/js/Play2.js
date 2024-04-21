@@ -154,12 +154,13 @@ class Play2 extends Phaser.Scene {
       this
     );
   }
+
   //*
   //Will Collect the Droplet when Collided with a Player
   //*
   collectDroplet(players, droplet) {
-    console.log("test");
     droplet.disableBody(true, true);
+    this.scene.start(`end`);
   }
   //*
   //Will constantly be called (draw() equivalent)

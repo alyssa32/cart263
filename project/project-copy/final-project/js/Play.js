@@ -140,10 +140,6 @@ class Play extends Phaser.Scene {
     );
   }
   //*
-  //Will switch to the next level once one of the players collides with the droplet
-  //*
-  gotWater() {}
-  //*
   //Will Collect the Droplet when Collided with a Player
   //*
   collectDroplet(players, droplet) {

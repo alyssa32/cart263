@@ -40,7 +40,12 @@ class End extends Phaser.Scene {
       button.setBackgroundColor("#5fb359");
       button.setColor("#000000");
     });
+    //Brings the player back to the first level if the button is pressed
+    button.on("pointerdown", () => {
+      this.scene.start(`play`);
+    });
   }
+
   //*
   //Will constantly be called (draw() equivalent)
   //*
