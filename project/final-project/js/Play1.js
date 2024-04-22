@@ -60,9 +60,9 @@ class Play1 extends Phaser.Scene {
       .setBounce(0.2)
       .setCollideWorldBounds(true);
     this.players[1].depth = 100;
-    //Makes the players not pushable
-    //this.players[0].setPushable(false);
-    //this.players[1].setPushable(false);
+    //Prevents the players from being pushed
+    this.players[0].setPushable(false);
+    this.players[1].setPushable(false);
     // //Adds collisions between the players
     this.physics.add.collider(this.players[0], this.players[1]);
   }
