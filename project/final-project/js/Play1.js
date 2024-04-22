@@ -101,15 +101,15 @@ class Play1 extends Phaser.Scene {
     //Draws a black rectangle over the ground
     var rect = this.add.rectangle(0, 753, 2850, 100, 0x000000);
     //Creates Black Moving Platform 0 and adds physics
-    this.blackPlatforms[0] = this.physics.add.image(900, 360, "ground");
+    this.blackPlatforms[0] = this.physics.add.image(990, 320, "ground");
     this.blackPlatforms[0].setImmovable(true);
     this.blackPlatforms[0].body.allowGravity = false;
     //Creates Black Moving Platform 1 and adds physics
-    this.blackPlatforms[1] = this.physics.add.image(500, 611, "ground");
+    this.blackPlatforms[1] = this.physics.add.image(450, 611, "ground");
     this.blackPlatforms[1].setImmovable(true);
     this.blackPlatforms[1].body.allowGravity = false;
     //Creates White Moving Platform 1 and adds physics
-    this.movingPlatformsWhite = this.physics.add.image(700, 500, "groundWhite");
+    this.movingPlatformsWhite = this.physics.add.image(680, 500, "groundWhite");
     this.movingPlatformsWhite.setImmovable(true);
     this.movingPlatformsWhite.body.allowGravity = false;
     this.movingPlatformsWhite.setVelocityY(50);
@@ -159,14 +159,14 @@ class Play1 extends Phaser.Scene {
     } else {
       //If no arrows are pressed, the player will not move left or right
       this.currentPlayer.setVelocityX(0);
-    } //Selected player will move upwards if the left arrow key is pressed and if the player is NOT already in the air
+    } //Selected player will move upwards if the up arrow key is pressed and if the player is NOT already in the air
     if (this.cursors.up.isDown == true && this.currentPlayer.body.onFloor()) {
       this.currentPlayer.setVelocityY(-330);
       window.showit = true;
     }
     //White Platform Movement
-    if (this.movingPlatformsWhite.y >= 515) {
-      this.movingPlatformsWhite.setVelocityY(-40);
+    if (this.movingPlatformsWhite.y >= 510) {
+      this.movingPlatformsWhite.setVelocityY(-50);
     } else if (this.movingPlatformsWhite.y <= 400) {
       this.movingPlatformsWhite.setVelocityY(40);
     }

@@ -144,7 +144,7 @@ class Play3 extends Phaser.Scene {
     } else {
       //If no arrows are pressed, the player will not move left or right
       this.currentPlayer.setVelocityX(0);
-    } //Selected player will move upwards if the left arrow key is pressed and if the player is NOT already in the air
+    } //Selected player will move upwards if the up arrow key is pressed and if the player is NOT already in the air
     if (this.cursors.up.isDown == true && this.currentPlayer.body.onFloor()) {
       this.currentPlayer.setVelocityY(-330);
       window.showit = true;

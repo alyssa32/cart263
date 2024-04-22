@@ -175,7 +175,7 @@ class Play2 extends Phaser.Scene {
     } else {
       //If no arrows are pressed, the player will not move left or right
       this.currentPlayer.setVelocityX(0);
-    } //Selected player will move upwards if the left arrow key is pressed and if the player is NOT already in the air
+    } //Selected player will move upwards if the up arrow key is pressed and if the player is NOT already in the air
     if (this.cursors.up.isDown == true && this.currentPlayer.body.onFloor()) {
       this.currentPlayer.setVelocityY(-330);
       window.showit = true;
@@ -183,9 +183,9 @@ class Play2 extends Phaser.Scene {
     //Black Platform Movements
     //Black Platform 0
     if (this.movingPlatformsBlack[0].x >= 650) {
-      this.movingPlatformsBlack[0].setVelocityX(-50);
+      this.movingPlatformsBlack[0].setVelocityX(-60);
     } else if (this.movingPlatformsBlack[0].x <= 550) {
-      this.movingPlatformsBlack[0].setVelocityX(50);
+      this.movingPlatformsBlack[0].setVelocityX(60);
     }
     //Black Platform 1
     if (this.movingPlatformsBlack[1].x >= 630) {
@@ -201,10 +201,10 @@ class Play2 extends Phaser.Scene {
       this.movingPlatformsWhite[0].setVelocityX(50);
     }
     //White Platform 1
-    if (this.movingPlatformsWhite[1].y >= 380) {
-      this.movingPlatformsWhite[1].setVelocityY(-40);
-    } else if (this.movingPlatformsWhite[1].y <= 290) {
-      this.movingPlatformsWhite[1].setVelocityY(40);
+    if (this.movingPlatformsWhite[1].y >= 410) {
+      this.movingPlatformsWhite[1].setVelocityY(-50);
+    } else if (this.movingPlatformsWhite[1].y <= 310) {
+      this.movingPlatformsWhite[1].setVelocityY(50);
     }
   }
 }
