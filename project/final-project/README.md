@@ -1,3 +1,5 @@
 # Bloom Buddies: Water Quest
 
-"Bloom Buddies: Water Quest"
+"Bloom Buddies: Water Quest" is a 2D strategy platformer game with two playable characters, a small white sprout and a taller black sprout. This is a single player game where the player must switch between characters to reveal the hidden objects. The goal is to fill up their watering can by collecting the water droplets. Once the watering can is full, the player can grab it which will bring them to the end screen. Displayed will be the two sprouts but they are now the same size because the white sprout grew due to the water.
+
+Ideally if I had more time, I would have liked to add audio for the jumps, water collection, and playful background music. Additionally, I aimed to make this game without any text or instructions and have the player figure out the mechanics through the game play. I did give in a little and add some text to guide the user to click the screen to change players as I did not know how to portray this message otherwise. Overall, I am happy and proud of the final product.
