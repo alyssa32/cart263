@@ -28,12 +28,6 @@ class Boot extends Phaser.Scene {
     this.load.image("button", "assets/images/littleButton.png");
     this.load.image("arrow", "assets/images/arrow.png");
     this.load.image("frame", "assets/images/frame.png");
-    //Audio
-    this.load.audioSprite("music", "assets/audio/squirelling.mp3");
-    this.load.audioSprite("pop0", "assets/audio/pop0.mp3");
-    this.load.audioSprite("pop1", "assets/audio/pop1.mp3");
-    this.load.audioSprite("waterDrip", "assets/audio/waterDrip.mp3");
-    this.load.audioSprite("waterSplash", "assets/audio/waterSplash.mp3");
   }
   //*
   //Adds the text and switches states when loaded
@@ -50,7 +44,7 @@ class Boot extends Phaser.Scene {
     };
     this.add.text(loading.x, loading.y, loading.string, style);
     //When the Boot scene starts up, it refers the player to the `intro` scene
-    this.scene.start(`play2`);
+    this.scene.start(`play0`);
   }
 
   update() {}
