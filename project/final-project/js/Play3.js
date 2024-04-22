@@ -23,7 +23,7 @@ class Play3 extends Phaser.Scene {
     //Colours the background black
     this.cameras.main.setBackgroundColor("#ffffff");
     //Adds the text under the watering can
-    this.add.text(678, 375, "2/2", {
+    this.add.text(680, 338, "2/2", {
       fontSize: "22px",
       fill: "#dedede",
     });
@@ -92,7 +92,7 @@ class Play3 extends Phaser.Scene {
     this.floor.create(700, 860, "ground").setScale(15).refreshBody();
     //Creates the hidden rectangle the "next" sign sits on to prevent it from falling
     this.hiddenBlock = this.physics.add.staticGroup();
-    this.hiddenBlock.create(700, 370, "ground2").setScale(0.01).refreshBody();
+    this.hiddenBlock.create(700, 330, "ground2").setScale(0.01).refreshBody();
     //Draws a black rectangle over the ground
     var rect = this.add.rectangle(0, 753, 2850, 100, 0x000000);
     //Creates White Moving Platform 0 and adds physics
@@ -150,9 +150,9 @@ class Play3 extends Phaser.Scene {
       window.showit = true;
     }
     //White Platform Movements
-    if (this.movingPlatformsWhite.y >= 625) {
+    if (this.movingPlatformsWhite.y >= 590) {
       this.movingPlatformsWhite.setVelocityY(-50);
-    } else if (this.movingPlatformsWhite.y <= 520) {
+    } else if (this.movingPlatformsWhite.y <= 490) {
       this.movingPlatformsWhite.setVelocityY(50);
     }
   }
