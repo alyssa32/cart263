@@ -101,11 +101,11 @@ class Play1 extends Phaser.Scene {
     //Draws a black rectangle over the ground
     var rect = this.add.rectangle(0, 753, 2850, 100, 0x000000);
     //Creates Black Moving Platform 0 and adds physics
-    this.blackPlatforms[0] = this.physics.add.image(990, 320, "ground");
+    this.blackPlatforms[0] = this.physics.add.image(970, 320, "ground");
     this.blackPlatforms[0].setImmovable(true);
     this.blackPlatforms[0].body.allowGravity = false;
     //Creates Black Moving Platform 1 and adds physics
-    this.blackPlatforms[1] = this.physics.add.image(450, 611, "ground");
+    this.blackPlatforms[1] = this.physics.add.image(460, 611, "ground");
     this.blackPlatforms[1].setImmovable(true);
     this.blackPlatforms[1].body.allowGravity = false;
     //Creates White Moving Platform 1 and adds physics
