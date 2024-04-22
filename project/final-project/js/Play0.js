@@ -22,6 +22,15 @@ class Play0 extends Phaser.Scene {
   create() {
     //Adds the forest background image
     this.add.image(680, 350, "forestBg").setScale(0.43);
+    //Displays the Title Text
+    this.add.text(455, 120, "BLOOM BUDDIES", {
+      fontSize: "70px",
+      fill: "#000000",
+    });
+    this.add.text(505, 220, "Water Quest", {
+      fontSize: "70px",
+      fill: "#ffffff",
+    });
     //Colours the background black
     this.cameras.main.setBackgroundColor("#ffffff");
     //Displays the watering can image and text in the top right corner
