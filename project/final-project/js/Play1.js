@@ -165,7 +165,7 @@ class Play1 extends Phaser.Scene {
       window.showit = true;
     }
     //White Platform Movement
-    if (this.movingPlatformsWhite.y >= 510) {
+    if (this.movingPlatformsWhite.y >= 515) {
       this.movingPlatformsWhite.setVelocityY(-50);
     } else if (this.movingPlatformsWhite.y <= 400) {
       this.movingPlatformsWhite.setVelocityY(40);

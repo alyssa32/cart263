@@ -46,7 +46,7 @@ class Play2 extends Phaser.Scene {
   player() {
     // Creating Player 1
     this.players[0] = this.physics.add
-      .sprite(100, 660, "player1")
+      .sprite(500, 300, "player1")
       .setScale(0.05)
       .setBounce(0.2)
       .setCollideWorldBounds(true);
@@ -97,7 +97,7 @@ class Play2 extends Phaser.Scene {
     this.floor.create(700, 860, "ground").setScale(15).refreshBody();
     //Creates the hidden rectangle the droplet sits on to prevent it from falling
     this.hiddenBlock = this.physics.add.staticGroup();
-    this.hiddenBlock.create(300, 120, "ground2").setScale(0.01).refreshBody();
+    this.hiddenBlock.create(300, 100, "ground2").setScale(0.01).refreshBody();
     //Draws a black rectangle over the ground
     var rect = this.add.rectangle(0, 753, 2850, 100, 0x000000);
     //Creates Black Moving Platform 0 and adds physics
@@ -127,7 +127,6 @@ class Play2 extends Phaser.Scene {
     );
     this.movingPlatformsWhite[1].setImmovable(true);
     this.movingPlatformsWhite[1].body.allowGravity = false;
-    this.movingPlatformsWhite[1].setVelocityY(50);
     //Adds collisions between the players and the platforms
     this.physics.add.collider(this.players, this.floor);
     this.physics.add.collider(this.players, this.movingPlatformsBlack);
@@ -139,7 +138,7 @@ class Play2 extends Phaser.Scene {
   water() {
     //Displays the droplet image
     this.droplet = this.physics.add
-      .sprite(280, 80, "droplet")
+      .sprite(280, 0, "droplet")
       .setOrigin(0)
       .setScale(0.2)
       .setCollideWorldBounds(true);
@@ -199,12 +198,6 @@ class Play2 extends Phaser.Scene {
       this.movingPlatformsWhite[0].setVelocityX(-50);
     } else if (this.movingPlatformsWhite[0].x <= 800) {
       this.movingPlatformsWhite[0].setVelocityX(50);
-    }
-    //White Platform 1
-    if (this.movingPlatformsWhite[1].y >= 410) {
-      this.movingPlatformsWhite[1].setVelocityY(-50);
-    } else if (this.movingPlatformsWhite[1].y <= 310) {
-      this.movingPlatformsWhite[1].setVelocityY(50);
     }
   }
 }
